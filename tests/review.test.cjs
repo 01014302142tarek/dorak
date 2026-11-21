@@ -1,0 +1,35 @@
+const {chromium}=require('playwright');
+const http=require('http'),fs=require('fs'),path=require('path'),assert=require('assert');
+const root=path.resolve(__dirname,'..');
+const server=http.createServer((req,res)=>{const file=path.join(root,new URL(req.url,'http://localhost').pathname==='/'?'index.html':new URL(req.url,'http://localhost').pathname);try{const body=fs.readFileSync(file);res.setHeader('Content-Type',file.endsWith('.js')?'application/javascript':file.endsWith('.json')?'application/json':file.endsWith('.png')?'image/png':'text/html');res.end(body);}catch{res.statusCode=404;res.end('not found');}});
+(async()=>{await new Promise(r=>server.listen(0,'127.0.0.1',r));const base=`http://127.0.0.1:${server.address().port}`;
+const browser=await chromium.launch({...(process.env.CHROME_PATH?{executablePath:process.env.CHROME_PATH}:{}),headless:true,args:['--no-sandbox']});
+const page=await browser.newPage({viewport:{width:390,height:844},timezoneId:'America/New_York'});
+const errors=[];page.on('pageerror',e=>errors.push(e.message));
+await page.clock.install({time:new Date('2026-11-19T14:30:00Z')});
+await page.goto(base);await page.clock.fastForward(2500);await page.screenshot({path:path.join(root,'tests','dorak-candidate-home.png'),fullPage:false,animations:'disabled'});
+await page.locator('#bank-list .row').first().click();await page.locator('#svc-list .row').first().click();await page.locator('#btn-next').click();
+assert.equal(await page.locator('#slots-grid button:not([disabled])').count(),0,'Elapsed slots disabled in Cairo even on NY browser');
+await page.screenshot({path:path.join(root,'tests','dorak-candidate-elapsed.png')});
+await page.locator('#days-strip button').nth(1).click();await page.locator('#slots-grid button').first().click();
+await page.locator('#inp-name').fill('اختبار محلي');await page.locator('#inp-phone').fill('٠١٠١٢٣٤٥٦٧٨');await page.locator('#inp-gov').selectOption({index:1});await page.locator('#inp-branch').fill('فرع تجريبي');
+assert.equal(await page.locator('#inp-phone').inputValue(),'01012345678');
+await page.locator('#btn-next').click();assert((await page.locator('#sum-rows').innerText()).includes('فرع تجريبي'));
+await page.locator('#ck-list button').evaluateAll(buttons=>buttons.forEach(b=>b.click()));await page.locator('#btn-next').click();
+await page.waitForSelector('#ticket-wrap .ticket');assert((await page.locator('#ticket-wrap').innerText()).includes('فرع تجريبي'));
+assert.equal(await page.locator('#ticket-wrap .tk-bar,#ticket-wrap .tk-qr').count(),0);
+await page.clock.fastForward(3000);await page.screenshot({path:path.join(root,'tests','dorak-candidate-ticket.png'),fullPage:true,animations:'disabled'});
+assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('dorak_v4')).bookings.length),1);
+await page.locator('[role=tab][data-tab=mine]').click();assert.equal(await page.locator('#cta-bar').isVisible(),false);
+await page.locator('#mine-wrap .row').first().click();await page.locator('#modal-actions button').first().click();
+assert.equal(await page.evaluate(()=>S.bookings.length),1,'Original retained during edit');
+assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('dorak_v4')).bookings.length),1,'Stored original retained');
+await page.getByRole('button',{name:'إلغاء التعديل والاحتفاظ بالخطة الأصلية'}).click();assert.equal(await page.locator('#mine-wrap .row').count(),1);
+// Loan estimator exact zero-interest case, through its real UI controls.
+await page.locator('[role=tab][data-tab=book]').click();await page.evaluate(()=>{S.step=1;render();});
+await page.locator('#svc-list .row').nth(5).click();await page.locator('.calc-trigger').click();await page.locator('#calc-principal').fill('12000');await page.locator('#calc-rate').fill('0');await page.locator('#calc-fees').fill('100');await page.locator('#calc-dur').selectOption('12');await page.locator('#calc-btn').click();
+assert((await page.locator('#calc-result').innerText()).includes('١٬٠٠٠'));await page.screenshot({path:path.join(root,'tests','dorak-candidate-loan.png')});
+// Atomic edit confirmation keeps one record.
+await page.locator('#loan-close').click();await page.locator('[role=tab][data-tab=mine]').click();await page.locator('#mine-wrap .row').first().click();await page.locator('#modal-actions button').first().click();await page.locator('#days-strip button').nth(2).click();await page.locator('#slots-grid button').nth(1).click();await page.locator('#btn-next').click();await page.locator('#ck-list button').evaluateAll(buttons=>buttons.forEach(b=>b.click()));await page.locator('#btn-next').click();assert.equal(await page.evaluate(()=>JSON.parse(localStorage.getItem('dorak_v4')).bookings.length),1,'No duplicate on edit');
+assert.deepEqual(errors,[],'No runtime errors');console.log('PASS: elapsed slots, Cairo timezone, Arabic phone digits, branch summary/ticket, no fake QR/barcode, local persistence, My Visits controls, edit cancellation, loan zero interest, atomic reschedule.');
+await browser.close();server.close();})().catch(e=>{console.error(e);server.close();process.exit(1)});
