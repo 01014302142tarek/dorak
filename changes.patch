@@ -1,0 +1,709 @@
+--- a/index.html
++++ b/index.html
+@@ -1,23 +1,21 @@
+ <!DOCTYPE html>
+-<html lang="ar" dir="rtl" data-theme="light">
++
++<html data-theme="light" dir="rtl" lang="ar">
+ <head>
+-<meta charset="UTF-8"/>
+-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+-<meta name="theme-color" content="#0E2A33"/>
+-<meta name="apple-mobile-web-app-capable" content="yes"/>
+-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+-<meta name="apple-mobile-web-app-title" content="دُرَك"/>
+-<meta name="description" content="احجز ميعادك في البنك من البيت"/>
+-<link rel="manifest" href="/manifest.json"/>
+-<link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+-<meta name="mobile-web-app-capable" content="yes"/>
+-<meta name="apple-mobile-web-app-capable" content="yes"/>
+-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+-<meta name="apple-mobile-web-app-title" content="دُرَك"/>
+-<title>دُرَك – حجز مواعيد البنوك</title>
+-
+-
+-
++<meta charset="utf-8"/>
++<meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
++<meta content="#0E2A33" name="theme-color"/>
++<meta content="yes" name="apple-mobile-web-app-capable"/>
++<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
++<meta content="دُرَك" name="apple-mobile-web-app-title"/>
++<meta content="منظّم زيارات شخصي للبنوك، لا ينفذ حجزًا لدى البنك." name="description"/>
++<link href="/manifest.json" rel="manifest"/>
++<link href="/apple-touch-icon.png" rel="apple-touch-icon"/>
++<meta content="yes" name="mobile-web-app-capable"/>
++<meta content="yes" name="apple-mobile-web-app-capable"/>
++<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
++<meta content="دُرَك" name="apple-mobile-web-app-title"/>
++<title>دُرَك – تنظيم زيارات البنوك</title>
+ <style>
+ /* ═══ CSS VARIABLES — light + dark ═══ */
+ :root{
+@@ -283,193 +281,174 @@
+ .rating-done{color:var(--muted);font-size:13px;margin-top:6px}
+ 
+ </style>
+-</head>
++<style>.day .lvl,.tm .lvl{display:none}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important}}</style></head>
+ <body>
+ <div class="app">
+-
+-  <!-- HEADER -->
+-  <div class="top">
+-    <div class="brand">
+-      <div class="logo"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+-      <h1 class="brand-name">دُرَك</h1>
+-    </div>
+-    <div style="display:flex;gap:8px;align-items:center">
+-      <button class="icon-btn" id="btn-dark" aria-label="تبديل الوضع الليلي" title="وضع ليلي">
+-        <svg id="ico-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
+-        <svg id="ico-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" hidden><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+-      </button>
+-      <span class="pill">احجز من البيت</span>
+-    </div>
+-  </div>
+-
+-  <!-- LED BOARD -->
+-  <div class="boardwrap">
+-    <div class="board" id="led-board">
+-      <div class="cells">
+-        <div class="cell" id="bc-time"><label>الوقت</label><div class="v"></div></div>
+-        <div class="cell" id="bc-bank"><label>البنك</label><div class="v"><span class="off">—</span></div></div>
+-        <div class="cell" id="bc-date"><label>التاريخ</label><div class="v"></div></div>
+-        <div class="cell" id="bc-slot"><label>الميعاد</label><div class="v"><span class="off">—</span></div></div>
+-      </div>
+-    </div>
+-  </div>
+-
+-  <!-- TABS -->
+-  <div class="tabs" role="tablist" style="margin-top:14px">
+-    <button class="tab" role="tab" data-tab="book" aria-selected="true">
+-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+-      حجز ميعاد
++<!-- HEADER -->
++<div class="top">
++<div class="brand">
++<div class="logo"><svg fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="22"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></div>
++<h1 class="brand-name">دُرَك</h1>
++</div>
++<div style="display:flex;gap:8px;align-items:center">
++<button aria-label="تبديل الوضع الليلي" class="icon-btn" id="btn-dark" title="وضع ليلي">
++<svg fill="none" height="18" id="ico-moon" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"></path></svg>
++<svg fill="none" height="18" hidden="" id="ico-sun" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18"><circle cx="12" cy="12" r="5"></circle><line x1="12" x2="12" y1="1" y2="3"></line><line x1="12" x2="12" y1="21" y2="23"></line><line x1="4.22" x2="5.64" y1="4.22" y2="5.64"></line><line x1="18.36" x2="19.78" y1="18.36" y2="19.78"></line><line x1="1" x2="3" y1="12" y2="12"></line><line x1="21" x2="23" y1="12" y2="12"></line><line x1="4.22" x2="5.64" y1="19.78" y2="18.36"></line><line x1="18.36" x2="19.78" y1="5.64" y2="4.22"></line></svg>
++</button>
++<span class="pill">نظّم زيارتك</span>
++</div>
++</div>
++<!-- LED BOARD -->
++<div class="boardwrap">
++<div class="board" id="led-board">
++<div class="cells">
++<div class="cell" id="bc-time"><label>الوقت</label><div class="v"></div></div>
++<div class="cell" id="bc-bank"><label>البنك</label><div class="v"><span class="off">—</span></div></div>
++<div class="cell" id="bc-date"><label>التاريخ</label><div class="v"></div></div>
++<div class="cell" id="bc-slot"><label>الميعاد</label><div class="v"><span class="off">—</span></div></div>
++</div>
++</div>
++</div>
++<!-- TABS -->
++<div class="tabs" role="tablist" style="margin-top:14px">
++<button aria-selected="true" class="tab" data-tab="book" role="tab">
++<svg fill="none" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="17"><rect height="18" rx="2" width="18" x="3" y="4"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg>
++      خطط لزيارة
+     </button>
+-    <button class="tab" role="tab" data-tab="mine" aria-selected="false">
+-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+-      حجوزاتي<span class="badge" id="badge-mine" hidden></span>
+-    </button>
+-  </div>
+-
+-  <!-- ═══ TAB: BOOK ═══ -->
+-  <div data-tab="book">
+-
+-    <!-- STEP 0: اختار البنك -->
+-    <div data-step="0">
+-      <h2 class="h1">اختار البنك</h2>
+-      <p class="sub">من أي بنك عاوز تاخد الخدمة؟</p>
+-      <div class="notice">
+-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+-        <span>دُرَك تطبيق تذكيري لتنظيم وقتك. الحجز يحتاج تأكيدًا من البنك عند الوصول.</span>
+-      </div>
+-      <!-- Recent & Favorites -->
+-      <div id="quick-section"></div>
+-      <!-- Search -->
+-      <div class="search">
+-        <svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+-        <input type="search" id="q-input" placeholder="ابحث باسم البنك أو الاختصار…" autocomplete="off"/>
+-        <button class="clr" id="q-clr" type="button"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+-      </div>
+-      <div class="chips">
+-        <button class="chip" id="chip-all" type="button" aria-pressed="true">الكل <span class="n">37</span></button>
+-        <button class="chip" id="chip-gov" type="button" aria-pressed="false">🏛️ حكومية <span class="n">9</span></button>
+-        <button class="chip" id="chip-isl" type="button" aria-pressed="false">☪️ إسلامية <span class="n">4</span></button>
+-        <button class="chip" id="chip-oth" type="button" aria-pressed="false">🌍 خاصة <span class="n">24</span></button>
+-        <button class="chip" id="chip-fav" type="button" aria-pressed="false">⭐ مفضلتي</button>
+-      </div>
+-      <div class="sheet" id="bank-list"></div>
+-    </div>
+-
+-    <!-- STEP 1: الخدمة -->
+-    <div data-step="1" hidden>
+-      <h2 class="h1">الخدمة المطلوبة</h2>
+-      <p class="sub">اختار الخدمة عشان نحضّرك صح</p>
+-      <div class="sheet" id="svc-list"></div>
+-    </div>
+-
+-    <!-- STEP 2: الميعاد -->
+-    <div data-step="2" hidden>
+-      <h2 class="h1">اختار الميعاد</h2>
+-      <p class="sub">البنوك شغّالة الأحد للخميس</p>
+-      <div class="sec-hd"><h2>اليوم</h2></div>
+-      <div class="days" id="days-strip"></div>
+-      <div class="legend"><span><i class="lvl"></i> متاح</span><span><i class="lvl m"></i> مزدحم</span><span><i class="lvl h"></i> ممتلئ</span></div>
+-      <div class="sec-hd" style="margin-top:16px"><h2>الوقت</h2></div>
+-      <div class="slots" id="slots-grid"></div>
+-    </div>
+-
+-    <!-- STEP 3: البيانات -->
+-    <div data-step="3" hidden>
+-      <h2 class="h1">بياناتك</h2>
+-      <p class="sub">بتتحفظ على جهازك بس</p>
+-      <div class="card">
+-        <div class="field"><label for="inp-name">الاسم الكامل</label><input class="inp" id="inp-name" type="text" placeholder="محمد أحمد محمود…" autocomplete="name"/></div>
+-        <div class="field"><label for="inp-phone">رقم الموبايل</label><input class="inp ltr" id="inp-phone" type="tel" placeholder="01XXXXXXXXX" inputmode="numeric" maxlength="11"/></div>
+-        <div class="field"><label for="inp-gov">المحافظة</label><select class="inp" id="inp-gov"><option value="">— اختار المحافظة —</option></select></div>
+-        <div class="field"><label for="inp-branch">الفرع <span class="opt">(اختياري)</span></label><input class="inp" id="inp-branch" type="text" placeholder="مثلاً: فرع المعادي…"/></div>
+-        <div class="field"><label for="inp-notes">ملاحظات <span class="opt">(اختياري)</span></label><textarea class="inp" id="inp-notes" rows="2" placeholder="أي تفاصيل إضافية…"></textarea></div>
+-      </div>
+-    </div>
+-
+-    <!-- STEP 4: التأكيد -->
+-    <div data-step="4" hidden>
+-      <h2 class="h1">راجع وأكد</h2>
+-      <p class="sub">تأكد من التفاصيل وعلّم على التشيكليست</p>
+-      <div class="card" style="padding:0;overflow:hidden"><div class="grp">📋 ملخص الحجز</div><div class="sum" id="sum-rows"></div></div>
+-      <div class="card ck-card" style="margin-top:14px">
+-        <div class="ck-hd"><b>✅ تشيكليست قبل ما تمشي</b></div>
+-        <div class="bar"><i id="ck-bar" style="width:0%"></i></div>
+-        <div id="ck-list"></div>
+-      </div>
+-      <div class="notice warn" style="margin-top:12px">
+-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+-        <span>خلّي معاك البطاقة الشخصية الأصلية وكل المستندات — البنك ممكن يرفض من غيرها.</span>
+-      </div>
+-    </div>
+-
+-    <!-- STEP 5: التذكرة -->
+-    <div data-step="5" hidden>
+-      <div class="okh"><div style="font-size:52px;line-height:1;text-align:center">🎉</div><h2 class="h1" style="text-align:center;margin-top:8px">تم الحجز!</h2><p class="sub" style="text-align:center">التذكرة الرقمية جاهزة</p></div>
+-      <div id="ticket-wrap"></div>
+-      <div class="share-row" id="share-btns"></div>
+-      <div style="margin-top:12px"><button class="btn" id="btn-new" type="button" style="width:100%;justify-content:center"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>حجز ميعاد جديد</button></div>
+-    </div>
+-
+-  </div><!-- /tab book -->
+-
+-  <!-- ═══ TAB: MINE ═══ -->
+-  <div data-tab="mine" hidden>
+-    <h2 class="h1">حجوزاتي</h2>
+-    <p class="sub">كل مواعيدك في مكان واحد</p>
+-    <div id="mine-wrap"></div>
+-  </div>
+-
++<button aria-selected="false" class="tab" data-tab="mine" role="tab">
++<svg fill="none" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="17"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
++      زياراتي<span class="badge" hidden="" id="badge-mine"></span>
++</button>
++</div>
++<!-- ═══ TAB: BOOK ═══ -->
++<div data-tab="book">
++<!-- STEP 0: اختار البنك -->
++<div data-step="0">
++<h2 class="h1">اختار البنك</h2>
++<p class="sub">من أي بنك عاوز تاخد الخدمة؟</p>
++<div class="notice">
++<svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="16"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="8" y2="12"></line><line x1="12" x2="12.01" y1="16" y2="16"></line></svg>
++<span>دُرَك منظّم زيارات شخصي، وليس خدمة حجز لدى البنوك. لا نعرف مواعيد الفروع المتاحة ولا نرسل بياناتك للبنك. تأكد من الفرع قبل الزيارة.</span>
++</div>
++<!-- Recent & Favorites -->
++<div id="quick-section"></div>
++<!-- Search -->
++<div class="search">
++<svg class="ic" fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18"><circle cx="11" cy="11" r="8"></circle><line x1="21" x2="16.65" y1="21" y2="16.65"></line></svg>
++<input autocomplete="off" id="q-input" placeholder="ابحث باسم البنك أو الاختصار…" type="search"/>
++<button class="clr" id="q-clr" type="button"><svg fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24" width="14"><line x1="18" x2="6" y1="6" y2="18"></line><line x1="6" x2="18" y1="6" y2="18"></line></svg></button>
++</div>
++<div class="chips">
++<button aria-pressed="true" class="chip" id="chip-all" type="button">الكل <span class="n">37</span></button>
++<button aria-pressed="false" class="chip" id="chip-gov" type="button">🏛️ حكومية <span class="n">9</span></button>
++<button aria-pressed="false" class="chip" id="chip-isl" type="button">☪️ إسلامية <span class="n">4</span></button>
++<button aria-pressed="false" class="chip" id="chip-oth" type="button">🌍 خاصة <span class="n">24</span></button>
++<button aria-pressed="false" class="chip" id="chip-fav" type="button">⭐ مفضلتي</button>
++</div>
++<div class="sheet" id="bank-list"></div>
++</div>
++<!-- STEP 1: الخدمة -->
++<div data-step="1" hidden="">
++<h2 class="h1">الخدمة المطلوبة</h2>
++<p class="sub">اختار الخدمة عشان نحضّرك صح</p>
++<div class="sheet" id="svc-list"></div>
++</div>
++<!-- STEP 2: الميعاد -->
++<div data-step="2" hidden="">
++<h2 class="h1">اختار الميعاد</h2>
++<p class="sub">المواعيد بتوقيت القاهرة. راجع أيام وساعات عمل فرعك قبل الزيارة.</p>
++<div class="sec-hd"><h2>اليوم</h2></div>
++<div class="days" id="days-strip"></div>
++
++<div class="sec-hd" style="margin-top:16px"><h2>الوقت</h2></div>
++<div class="slots" id="slots-grid"></div>
++</div>
++<!-- STEP 3: البيانات -->
++<div data-step="3" hidden="">
++<h2 class="h1">بياناتك</h2>
++<p class="sub">بتتحفظ على المتصفح ده بس. حذف بيانات الموقع يمسح خططك. لا تُرسل للبنك.</p>
++<div class="card">
++<div class="field"><label for="inp-name">الاسم الكامل</label><input autocomplete="name" class="inp" id="inp-name" placeholder="محمد أحمد محمود…" type="text"/></div>
++<div class="field"><label for="inp-phone">رقم الموبايل</label><input class="inp ltr" id="inp-phone" inputmode="numeric" maxlength="11" placeholder="01XXXXXXXXX" type="tel"/></div>
++<div class="field"><label for="inp-gov">المحافظة</label><select class="inp" id="inp-gov"><option value="">— اختار المحافظة —</option></select></div>
++<div class="field"><label for="inp-branch">الفرع <span class="opt">(اختياري)</span></label><input class="inp" id="inp-branch" placeholder="مثلاً: فرع المعادي…" type="text"/></div>
++<div class="field"><label for="inp-notes">ملاحظات <span class="opt">(اختياري)</span></label><textarea class="inp" id="inp-notes" placeholder="أي تفاصيل إضافية…" rows="2"></textarea></div>
++</div>
++<p class="sub">أدخل اسمًا ورقم موبايل مصريًا من 11 رقمًا يبدأ بـ 010 أو 011 أو 012 أو 015. الأرقام العربية مدعومة.</p></div>
++<!-- STEP 4: التأكيد -->
++<div data-step="4" hidden="">
++<h2 class="h1">راجع وأكد</h2>
++<p class="sub">تأكد من التفاصيل وعلّم على التشيكليست</p>
++<div class="card" style="padding:0;overflow:hidden"><div class="grp">📋 ملخص الزيارة</div><div class="sum" id="sum-rows"></div></div>
++<div class="card ck-card" style="margin-top:14px">
++<div class="ck-hd"><b>✅ تشيكليست قبل ما تمشي</b></div>
++<div class="bar"><i id="ck-bar" style="width:0%"></i></div>
++<div id="ck-list"></div>
++</div>
++<div class="notice warn" style="margin-top:12px">
++<svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="16"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"></path><line x1="12" x2="12" y1="9" y2="13"></line><line x1="12" x2="12.01" y1="17" y2="17"></line></svg>
++<span>خلّي معاك البطاقة الشخصية الأصلية وكل المستندات — البنك ممكن يرفض من غيرها.</span>
++</div>
++</div>
++<!-- STEP 5: التذكرة -->
++<div data-step="5" hidden="">
++<div class="okh"><div style="font-size:52px;line-height:1;text-align:center">✓</div><h2 class="h1" style="text-align:center;margin-top:8px">تم حفظ خطتك!</h2><p class="sub" style="text-align:center">خطة شخصية محفوظة على جهازك، وليست تأكيدًا من البنك</p></div>
++<div id="ticket-wrap"></div>
++<div class="share-row" id="share-btns"></div>
++<div style="margin-top:12px"><button class="btn" id="btn-new" style="width:100%;justify-content:center" type="button"><svg fill="none" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="17"><line x1="12" x2="12" y1="5" y2="19"></line><line x1="5" x2="19" y1="12" y2="12"></line></svg>خطة زيارة جديدة</button></div>
++</div>
++</div><!-- /tab book -->
++<!-- ═══ TAB: MINE ═══ -->
++<div data-tab="mine" hidden="">
++<h2 class="h1">زياراتي</h2>
++<p class="sub">كل مواعيدك في مكان واحد</p>
++<div id="mine-wrap"></div>
++</div>
+ </div><!-- /app -->
+-
+ <!-- BOTTOM CTA -->
+ <div class="cta" id="cta-bar">
+-  <div class="in">
+-    <button class="btn sm ghost" id="btn-back" type="button" hidden><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>رجوع</button>
+-    <button class="btn pri" id="btn-next" type="button" disabled>اختار البنك أولًا</button>
+-  </div>
+-</div>
+-
++<div class="in">
++<button class="btn sm ghost" hidden="" id="btn-back" type="button"><svg fill="none" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" viewbox="0 0 24 24" width="17"><polyline points="15 18 9 12 15 6"></polyline></svg>رجوع</button>
++<button class="btn pri" disabled="" id="btn-next" type="button">اختار البنك أولًا</button>
++</div>
++</div>
+ <!-- TOAST -->
+-<div class="toast" id="toast" role="status" aria-live="polite"></div>
+-
++<div aria-live="polite" class="toast" id="toast" role="status"></div>
+ <!-- BOOKING DETAIL MODAL -->
+-<div id="bk-modal" hidden style="position:fixed;inset:0;z-index:50;background:rgba(14,42,51,.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);overflow-y:auto;padding:20px 16px 60px">
+-  <div style="max-width:480px;margin:0 auto">
+-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+-      <span style="font-weight:700;font-size:17px;color:#fff">تفاصيل الحجز</span>
+-      <button id="modal-close" type="button" style="width:38px;height:38px;border-radius:50%;border:0;background:rgba(255,255,255,.15);color:#fff;font-size:20px;display:grid;place-items:center;cursor:pointer">×</button>
+-    </div>
+-    <div id="modal-ticket"></div>
+-    <!-- Rating -->
+-    <div id="modal-rating" style="margin-top:14px"></div>
+-    <!-- Actions -->
+-    <div id="modal-actions" style="margin-top:12px;display:grid;gap:10px"></div>
+-  </div>
+-</div>
+-
++<div hidden="" id="bk-modal" style="position:fixed;inset:0;z-index:50;background:rgba(14,42,51,.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);overflow-y:auto;padding:20px 16px 60px">
++<div style="max-width:480px;margin:0 auto">
++<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
++<span style="font-weight:700;font-size:17px;color:#fff">تفاصيل الزيارة</span>
++<button id="modal-close" style="width:38px;height:38px;border-radius:50%;border:0;background:rgba(255,255,255,.15);color:#fff;font-size:20px;display:grid;place-items:center;cursor:pointer" type="button">×</button>
++</div>
++<div id="modal-ticket"></div>
++<!-- Rating -->
++<div id="modal-rating" style="margin-top:14px"></div>
++<!-- Actions -->
++<div id="modal-actions" style="margin-top:12px;display:grid;gap:10px"></div>
++</div>
++</div>
+ <!-- LOAN CALC MODAL -->
+-<div id="loan-modal" hidden style="position:fixed;inset:0;z-index:55;background:rgba(14,42,51,.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:flex-end;padding:0">
+-  <div style="max-width:480px;margin:0 auto;width:100%;background:var(--card);border-radius:22px 22px 0 0;padding:20px 16px 40px;border-top:2px solid var(--ink)">
+-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+-      <b style="font-size:18px">🧾 حاسبة القرض الشخصي</b>
+-      <button id="loan-close" type="button" style="width:34px;height:34px;border-radius:50%;border:0;background:var(--paper2);font-size:18px;display:grid;place-items:center;cursor:pointer">×</button>
+-    </div>
+-    <div class="field"><label for="calc-salary">صافي الراتب الشهري (جنيه)</label><input class="inp ltr" id="calc-salary" type="number" placeholder="مثلاً: 8000" inputmode="numeric"/></div>
+-    <div class="field"><label for="calc-dur">مدة السداد</label>
+-      <select class="inp" id="calc-dur">
+-        <option value="12">١٢ شهر (سنة)</option><option value="24">٢٤ شهر (٢ سنة)</option>
+-        <option value="36" selected>٣٦ شهر (٣ سنوات)</option><option value="48">٤٨ شهر (٤ سنوات)</option>
+-        <option value="60">٦٠ شهر (٥ سنوات)</option><option value="84">٨٤ شهر (٧ سنوات)</option>
+-      </select>
+-    </div>
+-    <div id="calc-result" style="display:none;padding:14px;background:var(--yellow2);border:2px solid var(--ink);border-radius:14px;margin-top:8px"></div>
+-    <button class="btn pri" id="calc-btn" type="button" style="width:100%;margin-top:14px;justify-content:center">احسب</button>
+-    <p style="font-size:11.5px;color:var(--muted);text-align:center;margin-top:10px">الأرقام تقديرية فقط — التأكيد النهائي من البنك</p>
+-  </div>
+-</div>
+-
++<div hidden="" id="loan-modal" style="position:fixed;inset:0;z-index:55;background:rgba(14,42,51,.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:flex-end;padding:0">
++<div style="max-width:480px;margin:0 auto;width:100%;background:var(--card);border-radius:22px 22px 0 0;padding:20px 16px 40px;border-top:2px solid var(--ink)">
++<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
++<b style="font-size:18px">🧾 تقدير أقساط قرض بفائدة متناقصة</b>
++<button id="loan-close" style="width:34px;height:34px;border-radius:50%;border:0;background:var(--paper2);font-size:18px;display:grid;place-items:center;cursor:pointer" type="button">×</button>
++</div>
++<div class="field"><label for="calc-principal">مبلغ القرض (جنيه)</label><input class="inp ltr" id="calc-principal" inputmode="decimal" min="1" placeholder="100000" type="number"/><label for="calc-rate">الفائدة السنوية الاسمية المتناقصة (%)</label><input class="inp ltr" id="calc-rate" inputmode="decimal" max="100" min="0" placeholder="أدخل نسبة عرض البنك" step="0.01" type="number"/><label for="calc-fees">رسوم مقدمة (جنيه، لا تُموّل ضمن القرض)</label><input class="inp ltr" id="calc-fees" inputmode="decimal" min="0" step="0.01" type="number" value="0"/></div>
++<div class="field"><label for="calc-dur">مدة السداد</label>
++<select class="inp" id="calc-dur">
++<option value="12">١٢ شهر (سنة)</option><option value="24">٢٤ شهر (٢ سنة)</option>
++<option selected="" value="36">٣٦ شهر (٣ سنوات)</option><option value="48">٤٨ شهر (٤ سنوات)</option>
++<option value="60">٦٠ شهر (٥ سنوات)</option><option value="84">٨٤ شهر (٧ سنوات)</option>
++</select>
++</div>
++<div id="calc-result" style="display:none;padding:14px;background:var(--yellow2);border:2px solid var(--ink);border-radius:14px;margin-top:8px"></div>
++<button class="btn pri" id="calc-btn" style="width:100%;margin-top:14px;justify-content:center" type="button">احسب</button>
++<p style="font-size:11.5px;color:var(--muted);text-align:center;margin-top:10px">الأرقام تقديرية فقط — التأكيد النهائي من البنك</p>
++</div>
++</div>
+ <!-- QR LIBRARY -->
+-
+ <script>
+ /* ============ BANKS — [id, ar, en, acr, cat, aliases, note, hotline] ============ */
+ const BANKS_RAW = [
+@@ -550,6 +529,14 @@
+ 
+ </script>
+ <script>
++const cairoParts = (date = new Date()) => Object.fromEntries(new Intl.DateTimeFormat('en-CA', {
++  timeZone:'Africa/Cairo',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'
++}).formatToParts(date).filter(p=>p.type!=='literal').map(p=>[p.type,p.value]));
++const cairoNow = () => { const p=cairoParts(); return `${p.year}-${p.month}-${p.day}T${p.hour}:${p.minute}`; };
++const isFutureVisit = (day, time) => !!(day && time && `${day}T${time}` > cairoNow());
++const normalizePhone = value => String(value).replace(/[٠-٩]/g,c=>String(c.charCodeAt(0)-1632)).replace(/[۰-۹]/g,c=>String(c.charCodeAt(0)-1776)).replace(/[^0-9]/g,'');
++const validDetails = () => S.name.trim().length >= 2 && /^01[0125][0-9]{8}$/.test(normalizePhone(S.phone)) && !!S.gov;
++
+ /* ═══════════════════════════════════════
+    دُرَك — app.js  (full rewrite)
+ ═══════════════════════════════════════ */
+@@ -623,7 +610,7 @@
+ };
+ 
+ /* ── date helpers ── */
+-const todayDate = () => { const d=new Date(); return `${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.getDate())}`; };
++const todayDate = () => cairoNow().slice(0,10);
+ const parseDate = str => { if(!str)return null; const[y,m,d]=str.split('-').map(Number); return new Date(y,m-1,d); };
+ const fmtDate   = str => { if(!str)return''; const d=parseDate(str); return `${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}`; };
+ const isWorkday = str => { const d=parseDate(str); const w=d.getDay(); return w!==5&&w!==6&&!HOLIDAYS.has(str.slice(5)); };
+@@ -632,8 +619,8 @@
+ 
+ /* ── slot helpers ── */
+ const slotLoad  = ds => { try { return JSON.parse(localStorage.getItem(`slots_${ds}`)||'{}'); } catch(_){return{};} };
+-const slotBusy  = (ds,t) => (slotLoad(ds)[t]||0)>=3;
+-const slotLevel = (ds,t) => { const c=slotLoad(ds)[t]||0; return c===0?'low':c<=1?'mid':'high'; };
++const slotBusy = () => false;
++const slotLevel = () => 'low';
+ const reserveSlot = (ds,t) => { const d=slotLoad(ds); d[t]=(d[t]||0)+1; try{localStorage.setItem(`slots_${ds}`,JSON.stringify(d));}catch(_){} };
+ const releaseSlot = (ds,t) => { const d=slotLoad(ds); if(d[t])d[t]=Math.max(0,d[t]-1); try{localStorage.setItem(`slots_${ds}`,JSON.stringify(d));}catch(_){} };
+ 
+@@ -648,7 +635,7 @@
+ 
+ /* ── board ── */
+ const updateBoard = () => {
+-  const now=new Date(), ts=`${pad2(now.getHours())}:${pad2(now.getMinutes())}`, ds=`${pad2(now.getDate())}-${pad2(now.getMonth()+1)}`;
++  const now=new Date(), ts=`${pad2(Number(cairoParts().hour))}:${pad2(Number(cairoParts().minute))}`, ds=`${pad2(Number(cairoParts().day))}-${pad2(Number(cairoParts().month))}`;
+   const bk=S.bank?bankById(S.bank):null, sv=S.service?serviceById(S.service):null;
+   const ct=eid('bc-time'),cd=eid('bc-date'),cb=eid('bc-bank'),cs=eid('bc-slot');
+   if(!ct)return;
+@@ -700,7 +687,7 @@
+     'BEGIN:VEVENT',
+     `DTSTART:${start}`,`DTEND:${end}`,
+     `SUMMARY:${bank?.ar||'بنك'} – ${sv?.short||'ميعاد'}`,
+-    `DESCRIPTION:كود الحجز: ${bk.code}\\nالخدمة: ${sv?.name||''}\\nالاسم: ${bk.name}`,
++    `DESCRIPTION:مرجع الخطة المحلي: ${bk.code}\\nالخدمة: ${sv?.name||''}\\nالاسم: ${bk.name}`,
+     `LOCATION:${bank?.ar||''} – ${bk.gov||''}${bk.branch?' فرع '+bk.branch:''}`,
+     `UID:${bk.code}@dorak`,
+     'BEGIN:VALARM','TRIGGER:-PT2H','ACTION:DISPLAY',`DESCRIPTION:تذكير: ميعادك في ${bank?.ar||'البنك'} بعد ساعتين`,'END:VALARM',
+@@ -716,7 +703,7 @@
+ const shareWA = bk => {
+   const bank=bankById(bk.bank), sv=serviceById(bk.service);
+   const [hh,mm]=bk.slot.split(':'); const h12=parseInt(hh)%12||12; const ap=parseInt(hh)<12?'ص':'م';
+-  const text = `📋 حجز بنك – دُرَك\n\n🏦 ${bank?.ar||'—'}\n⚙️ ${sv?.name||'—'}\n📅 ${fmtDate(bk.dateStr)}\n🕐 ${h12}:${mm} ${ap}\n📍 ${bk.gov||'—'}\n👤 ${bk.name||'—'}\n\n🏷️ كود الحجز: ${bk.code}`;
++  const text = `📋 خطة زيارة بنك – دُرَك\n\n🏦 ${bank?.ar||'—'}\n⚙️ ${sv?.name||'—'}\n📅 ${fmtDate(bk.dateStr)}\n🕐 ${h12}:${mm} ${ap}\n📍 ${bk.gov||'—'}\n👤 ${bk.name||'—'}\n\n🏷️ مرجع الخطة المحلي: ${bk.code}`;
+   window.open('https://wa.me/?text='+encodeURIComponent(text),'_blank');
+ };
+ 
+@@ -735,19 +722,17 @@
+ const openLoanCalc = () => { eid('loan-modal').hidden=false; };
+ eid('loan-close')?.addEventListener('click',()=>{ eid('loan-modal').hidden=true; });
+ eid('calc-btn')?.addEventListener('click',()=>{
+-  const sal = parseFloat(eid('calc-salary').value);
+-  const dur = parseInt(eid('calc-dur').value);
+-  if(!sal||sal<500){ showToast('ادخل راتبك الصافي أولاً'); return; }
+-  const maxInst = sal * 0.40;
+-  const maxLoan = maxInst * dur;
+-  const res = eid('calc-result');
+-  res.style.display='block';
+-  res.innerHTML = `
+-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+-      <div><div style="font-size:12px;color:var(--muted)">الحد الأقصى للقرض</div><div style="font-family:var(--dot);font-size:22px;font-weight:900;margin-top:2px">${Math.round(maxLoan).toLocaleString('ar-EG')}</div><div style="font-size:12px;color:var(--muted)">جنيه</div></div>
+-      <div><div style="font-size:12px;color:var(--muted)">القسط الشهري</div><div style="font-family:var(--dot);font-size:22px;font-weight:900;margin-top:2px">${Math.round(maxInst).toLocaleString('ar-EG')}</div><div style="font-size:12px;color:var(--muted)">جنيه/شهر</div></div>
+-    </div>
+-    <div style="margin-top:10px;font-size:12.5px;color:var(--muted)">بناءً على قاعدة الـ 40% من الراتب الصافي × ${dur} شهر</div>`;
++  const amount=Number(eid('calc-principal').value);
++  const annual=Number(eid('calc-rate').value);
++  const months=Number(eid('calc-dur').value);
++  const fees=Number(eid('calc-fees').value||0);
++  if(eid('calc-rate').value.trim()===''||!(amount>0)||!Number.isFinite(annual)||annual<0||annual>100||!Number.isInteger(months)||months<1||months>360||fees<0||!Number.isFinite(fees)) { showToast('راجع المبلغ والفائدة والمدة والرسوم');return; }
++  const r=annual/1200;
++  const monthly=r===0?amount/months:amount*r/(1-Math.pow(1+r,-months));
++  const total=monthly*months+fees;
++  const money=n=>n.toLocaleString('ar-EG',{style:'currency',currency:'EGP',maximumFractionDigits:2});
++  const res=eid('calc-result');res.style.display='block';
++  res.textContent=`القسط التقديري: ${money(monthly)} شهريًا. إجمالي السداد شامل الرسوم المقدمة: ${money(total)}. تكلفة الفائدة والرسوم: ${money(total-amount)}. فائدة سنوية اسمية متناقصة بقسط ثابت؛ لا تشمل تأمينًا أو رسومًا أخرى إلا ما أدخلته. التقدير ليس عرضًا أو موافقة من بنك.`;
+ });
+ 
+ /* ══════════ RENDERERS ══════════ */
+@@ -874,11 +859,11 @@
+   if(!S.dateStr){ slotsEl.innerHTML=`<div style="grid-column:1/-1;padding:16px;text-align:center;color:var(--muted)">اختار يوم أولاً</div>`; return; }
+   SLOT_TIMES.forEach(t=>{
+     // if editing, free the old slot temporarily for display
+-    const busy = slotBusy(S.dateStr,t) && !(S.editId && S.dateStr===S.editOldDate && t===S.editOldSlot);
++    const busy = !isFutureVisit(S.dateStr,t);
+     const lv=slotLevel(S.dateStr,t);
+     const [hh,mm]=t.split(':');const ap=parseInt(hh)<12?'ص':'م';const h12=parseInt(hh)%12||12;
+     const btn=mk('button',{className:`tm${S.slot===t?' sel':''}`,type:'button',disabled:busy});
+-    btn.innerHTML=`<span class="lvl${lv==='mid'?' m':lv==='high'?' h':''}"></span><span class="tt">${h12}:${mm}<small>${ap}</small></span>${busy?`<em>محجوز</em>`:''}`;
++    btn.innerHTML=`<span class="lvl${lv==='mid'?' m':lv==='high'?' h':''}"></span><span class="tt">${h12}:${mm}<small>${ap}</small></span>${busy?`<em>فات وقته</em>`:''}`;
+     btn.onclick=()=>{ if(!busy){S.slot=t; S.step=3; render(); updateBoard();} };
+     slotsEl.appendChild(btn);
+   });
+@@ -901,7 +886,7 @@
+   sumEl.innerHTML=[
+     ['🏦','البنك',bk?.ar||'—'],['⚙️','الخدمة',sv?.name||'—'],
+     ['📅','التاريخ',fmtDate(S.dateStr)],['🕐','الميعاد',`${h12}:${mm} ${ap}`],
+-    ['📍','المحافظة',S.gov||'—'],['👤','الاسم',S.name||'—'],['📱','الموبايل',S.phone||'—'],
++    ['📍','المحافظة',S.gov||'—'],['📌','الفرع',S.branch.trim()||'لم يُحدد'],['👤','الاسم',S.name||'—'],['📱','الموبايل',S.phone||'—'],
+     ...(S.notes?[['📝','ملاحظات',S.notes]]:[])
+   ].map(([ico,lbl,val])=>`<div class="sum-row"><span>${ico} ${esc(lbl)}</span><b>${esc(val)}</b></div>`).join('');
+ };
+@@ -928,15 +913,15 @@
+   const bank=bankById(bk.bank),sv=serviceById(bk.service);
+   const [hh,mm]=(bk.slot||'00:00').split(':');const ap=parseInt(hh)<12?'ص':'م';const h12=parseInt(hh)%12||12;
+   const wrap=eid(targetId); if(!wrap)return;
+-  const isPast=bk.dateStr<todayDate();
+-  const bars=Array.from({length:80},(_,i)=>`<rect x="${i*3+.5}" y="${Math.random()>.35?0:Math.floor(Math.random()*12)}" width="${Math.random()>.3?2:1}" height="${32+(Math.random()>.6?10:0)}" fill="${Math.random()>.2?'var(--ink)':'transparent'}"/>`).join('');
++  const isPast=!isFutureVisit(bk.dateStr,bk.slot);
++
+ 
+   wrap.innerHTML=`
+   <div class="printer${animate?' go':''}">
+     <div class="slotbar"></div>
+     <div class="ticket">
+       <div class="tk-top">
+-        ${isPast?`<div class="stamp">مكتمل</div>`:''}
++        ${isPast?`<div class="stamp">سابقة</div>`:''}
+         <div class="tk-bank">
+           <div class="tile" style="width:52px;height:52px;font-size:12px">${esc(bank?.abbr||'?')}</div>
+           <div><b>${esc(bank?.ar||'—')}</b><small>${esc(bank?.en||'')}</small></div>
+@@ -945,21 +930,19 @@
+         <dl class="tk-grid">
+           <div><dt>الخدمة</dt><dd>${esc(sv?.name||'—')}</dd></div>
+           <div><dt>المحافظة</dt><dd>${esc(bk.gov||'—')}</dd></div>
+-          <div><dt>الاسم</dt><dd>${esc(bk.name||'—')}</dd></div>
++          <div><dt>الفرع</dt><dd>${esc(bk.branch||'لم يُحدد')}</dd></div><div><dt>الاسم</dt><dd>${esc(bk.name||'—')}</dd></div>
+           <div><dt>الموبايل</dt><dd dir="ltr" style="text-align:right">${esc(bk.phone||'—')}</dd></div>
+         </dl>
+       </div>
+       <div class="tk-tear"></div>
+       <div class="tk-bot">
+         <div class="tk-code">${esc(bk.code)}</div>
+-        <svg class="tk-bar" height="46" viewBox="0 0 240 46">${bars}</svg>
+-        <div class="tk-who"><span>🏷️ <b>${esc(bk.code)}</b></span><span>صالح ليوم الحجز فقط</span></div>
+-        <div class="tk-qr" id="qr-${esc(bk.code)}"></div>
++        <div class="tk-who"><span>🏷️ <b>${esc(bk.code)}</b></span><span>صالح ليوم خطة الزيارة فقط</span></div>
+       </div>
+     </div>
+   </div>`;
+   // generate QR after DOM is ready
+-  setTimeout(()=>{ const c=eid(`qr-${bk.code}`); if(c) makeQR(bk.code,c,110); },50);
++
+ };
+ 
+ const renderTicket = () => {
+@@ -984,23 +967,23 @@
+ const renderMine = () => {
+   const wrap=eid('mine-wrap'); if(!wrap)return; wrap.innerHTML='';
+   const td=todayDate();
+-  const fut=S.bookings.filter(b=>b.dateStr>=td).sort((a,b)=>(a.dateStr+a.slot).localeCompare(b.dateStr+b.slot));
+-  const past=S.bookings.filter(b=>b.dateStr<td).sort((a,b)=>(b.dateStr+b.slot).localeCompare(a.dateStr+a.slot));
++  const fut=S.bookings.filter(b=>isFutureVisit(b.dateStr,b.slot)).sort((a,b)=>(a.dateStr+a.slot).localeCompare(b.dateStr+b.slot));
++  const past=S.bookings.filter(b=>!isFutureVisit(b.dateStr,b.slot)).sort((a,b)=>(b.dateStr+b.slot).localeCompare(a.dateStr+a.slot));
+   const badge=eid('badge-mine'); if(badge){badge.textContent=fut.length||'';badge.hidden=fut.length===0;}
+-  if(!fut.length&&!past.length){ wrap.innerHTML=`<div class="empty" style="padding:40px 20px"><b>📋 مفيش حجوزات</b>احجز من التبويب التاني</div>`; return; }
++  if(!fut.length&&!past.length){ wrap.innerHTML=`<div class="empty" style="padding:40px 20px"><b>📋 مفيش زيارات</b>احجز من التبويب التاني</div>`; return; }
+ 
+   const mkRow=bk=>{
+     const bank=bankById(bk.bank),sv=serviceById(bk.service);
+     const [hh,mm]=(bk.slot||'00:00').split(':');const h12=parseInt(hh)%12||12;const ap=parseInt(hh)<12?'ص':'م';
+-    const isFut=bk.dateStr>=td, isSoon=isFut&&(parseDate(bk.dateStr)-new Date())<3*86400000;
++    const isFut=isFutureVisit(bk.dateStr,bk.slot), isSoon=isFut&&(parseDate(bk.dateStr)-new Date())<3*86400000;
+     const row=mk('button',{className:`row bk${!isFut?' past':''}`,type:'button'});
+-    row.innerHTML=`<div class="tile" style="font-size:11px">${esc(bank?.abbr||'?')}</div><div class="rn"><b>${esc(bank?.ar||'—')} · ${esc(sv?.short||'—')}</b><small class="when">${esc(fmtDate(bk.dateStr))} الساعة ${h12}:${mm} ${ap}</small><small>${esc(bk.gov||'')}${bk.name?' · '+bk.name:''}</small></div><span class="chip2${isSoon?' soon':''}${!isFut?' past':''}">${!isFut?'مكتمل':isSoon?'قريب':'قادم'}</span>`;
++    row.innerHTML=`<div class="tile" style="font-size:11px">${esc(bank?.abbr||'?')}</div><div class="rn"><b>${esc(bank?.ar||'—')} · ${esc(sv?.short||'—')}</b><small class="when">${esc(fmtDate(bk.dateStr))} الساعة ${h12}:${mm} ${ap}</small><small>${esc(bk.gov||'')}${bk.name?' · '+esc(bk.name):''}</small></div><span class="chip2${isSoon?' soon':''}${!isFut?' past':''}">${!isFut?'سابقة':isSoon?'قريب':'قادم'}</span>`;
+     row.onclick=()=>showBkDetail(bk.id);
+     return row;
+   };
+ 
+-  if(fut.length){ wrap.appendChild(mk('div',{className:'sec-hd'},mk('h2',{},'الحجوزات القادمة'),mk('span',{className:'opt'},`${fut.length}`))); const sh=mk('div',{className:'sheet'}); fut.forEach(b=>sh.appendChild(mkRow(b))); wrap.appendChild(sh); }
+-  if(past.length){ wrap.appendChild(mk('div',{className:'sec-hd'},mk('h2',{},'حجوزات سابقة'),mk('span',{className:'opt'},`${past.length}`))); const sh=mk('div',{className:'sheet'}); past.forEach(b=>sh.appendChild(mkRow(b))); wrap.appendChild(sh); }
++  if(fut.length){ wrap.appendChild(mk('div',{className:'sec-hd'},mk('h2',{},'الزيارات القادمة'),mk('span',{className:'opt'},`${fut.length}`))); const sh=mk('div',{className:'sheet'}); fut.forEach(b=>sh.appendChild(mkRow(b))); wrap.appendChild(sh); }
++  if(past.length){ wrap.appendChild(mk('div',{className:'sec-hd'},mk('h2',{},'زيارات سابقة'),mk('span',{className:'opt'},`${past.length}`))); const sh=mk('div',{className:'sheet'}); past.forEach(b=>sh.appendChild(mkRow(b))); wrap.appendChild(sh); }
+ };
+ 
+ /* booking detail modal */
+@@ -1009,7 +992,7 @@
+   const modal=eid('bk-modal'); if(!modal)return;
+   renderTicketFor(bk,'modal-ticket');
+ 
+-  const isPast=bk.dateStr<todayDate();
++  const isPast=!isFutureVisit(bk.dateStr,bk.slot);
+   S.cancelTarget=id;
+ 
+   // rating for past bookings
+@@ -1034,11 +1017,11 @@
+     const rescBtn=mk('button',{className:'btn',type:'button',style:'width:100%;justify-content:center'});
+     rescBtn.innerHTML=`<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>أعد الجدولة`;
+     rescBtn.onclick=()=>{
+-      releaseSlot(bk.dateStr,bk.slot);
++
+       S.editId=id; S.editOldDate=bk.dateStr; S.editOldSlot=bk.slot;
+       S.bank=bk.bank; S.service=bk.service; S.gov=bk.gov; S.branch=bk.branch||''; S.name=bk.name; S.phone=bk.phone; S.notes=bk.notes||'';
+       S.dateStr=null; S.slot=null; checkedItems=[];
+-      S.bookings=S.bookings.filter(b=>b.id!==id);
++
+       modal.hidden=true; S.tab='book'; S.step=2; render(); updateBoard();
+       showToast('اختار ميعاد جديد');
+     };
+@@ -1061,12 +1044,12 @@
+ 
+     // cancel
+     const cancelBtn=mk('button',{className:'btn danger',type:'button',style:'width:100%;justify-content:center'});
+-    cancelBtn.innerHTML=`<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>إلغاء الحجز`;
++    cancelBtn.innerHTML=`<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>إلغاء خطة الزيارة`;
+     cancelBtn.onclick=()=>{
+-      if(!confirm(`إلغاء حجز ${bankById(bk.bank)?.ar}؟`))return;
++      if(!confirm(`حذف خطة ${bankById(bk.bank)?.ar}؟`))return;
+       releaseSlot(bk.dateStr,bk.slot);
+       S.bookings=S.bookings.filter(b=>b.id!==id); save();
+-      modal.hidden=true; renderMine(); showToast('✅ تم إلغاء الحجز');
++      modal.hidden=true; renderMine(); showToast('✅ تم إلغاء خطة الزيارة');
+     };
+     acts.appendChild(cancelBtn);
+   } else {
+@@ -1081,28 +1064,31 @@
+ const canAdvance = () => {
+   if(S.step===0) return !!S.bank;
+   if(S.step===1) return !!S.service;
+-  if(S.step===2) return !!(S.dateStr&&S.slot);
+-  if(S.step===3) return !!(S.name.trim()&&S.phone.trim().length>=10&&S.gov);
+-  if(S.step===4) return checkedItems.length>=CHECKLIST.length;
++  if(S.step===2) return isFutureVisit(S.dateStr,S.slot);
++  if(S.step===3) return validDetails() && isFutureVisit(S.dateStr,S.slot);
++  if(S.step===4) return checkedItems.length>=CHECKLIST.length && validDetails() && isFutureVisit(S.dateStr,S.slot);
+   return false;
+ };
+-const nextLabel = () => ['اختيار الخدمة ←','اختيار الميعاد ←','تسجيل بياناتك ←','مراجعة الحجز ←','تأكيد الحجز 🎫'][S.step]||'';
++const nextLabel = () => ['اختيار الخدمة ←','اختيار الميعاد ←','تسجيل بياناتك ←','مراجعة خطة الزيارة ←','تأكيد خطة الزيارة 🎫'][S.step]||'';
+ 
+ const confirmBooking = () => {
++  if(!isFutureVisit(S.dateStr,S.slot)) { showToast('الميعاد فات. اختار وقت جديد بتوقيت القاهرة.'); S.step=2;render();return; }
++  if(!validDetails()) { S.step=3;render();showToast('راجع الاسم ورقم الموبايل والمحافظة');return; }
+   const id=S.editId||uid();
+-  const bk={id,code:id,bank:S.bank,service:S.service,dateStr:S.dateStr,slot:S.slot,gov:S.gov,branch:S.branch,name:S.name,phone:S.phone,notes:S.notes,createdAt:Date.now()};
+-  reserveSlot(S.dateStr,S.slot);
+-  S.bookings.push(bk); S._lastId=id; S.editId=null;
+-  pushRecent(S.bank);
+-  save(); S.step=5; render(); updateBoard();
+-  showToast('🎉 تم تسجيل الحجز بنجاح!');
++  const bk={id,code:id,bank:S.bank,service:S.service,dateStr:S.dateStr,slot:S.slot,gov:S.gov,branch:S.branch.trim(),name:S.name.trim(),phone:normalizePhone(S.phone),notes:S.notes,createdAt:Date.now()};
++  const next=S.bookings.filter(item=>item.id!==id).concat(bk);
++  try {
++    localStorage.setItem(SAVE_KEY,JSON.stringify({bookings:next,name:bk.name,phone:bk.phone,gov:bk.gov}));
++  } catch(error) { showToast('تعذّر الحفظ على الجهاز. خطتك الأصلية لم تتغير.');return; }
++  S.bookings=next;S._lastId=id;S.editId=null;pushRecent(S.bank);S.step=5;render();updateBoard();
++  showToast('تم حفظ خطة الزيارة على جهازك. لم تُرسل إلى البنك.');
+ };
+ 
+ const render = () => {
+   $$('[data-step]').forEach(e=>e.hidden=parseInt(e.dataset.step)!==S.step);
+   $$('[data-tab]:not([role=tab])').forEach(e=>e.hidden=e.dataset.tab!==S.tab);
+   $$('[role="tab"]').forEach(t=>t.setAttribute('aria-selected',t.dataset.tab===S.tab?'true':'false'));
+-  const cta=eid('cta-bar'); if(cta) cta.hidden=S.step===5;
++  const cta=eid('cta-bar'); if(cta) cta.hidden=S.step===5||S.tab!=='book';
+   const back=eid('btn-back'); if(back) back.hidden=S.step===0||S.tab==='mine';
+   if(S.tab==='book'){
+     if(S.step===0){ renderQuick(); renderBanks(); }
+@@ -1166,7 +1152,7 @@
+ 
+   // info inputs
+   eid('inp-name')?.addEventListener('input',e=>{ S.name=e.target.value; });
+-  eid('inp-phone')?.addEventListener('input',e=>{ S.phone=e.target.value.replace(/[^\d]/g,''); e.target.value=S.phone; });
++  eid('inp-phone')?.addEventListener('input',e=>{ S.phone=normalizePhone(e.target.value); e.target.value=S.phone; });
+   eid('inp-gov')?.addEventListener('change',e=>{ S.gov=e.target.value; });
+   eid('inp-branch')?.addEventListener('input',e=>{ S.branch=e.target.value; });
+   eid('inp-notes')?.addEventListener('input',e=>{ S.notes=e.target.value; });
+@@ -1194,16 +1180,7 @@
+ });
+ 
+ </script>
+-<script>
+-// Minimal QR stub - shows code text if library not available
+-if(typeof QRCode === 'undefined'){
+-  window.QRCode = class QRCode {
+-    constructor(el, opts){
+-      el.innerHTML = '<div style="width:'+opts.width+'px;height:'+opts.height+'px;background:#fff;border:2px solid #0E2A33;border-radius:8px;display:grid;place-items:center;font-family:monospace;font-size:11px;font-weight:700;text-align:center;padding:6px;word-break:break-all;color:#0E2A33">'+opts.text+'</div>';
+-    }
+-  };
+-}
+-</script>
++
+ <script>
+ if ('serviceWorker' in navigator) {
+   window.addEventListener('load', () => {
+@@ -1213,5 +1190,13 @@
+   });
+ }
+ </script>
+-</body>
++<script>
++document.addEventListener('DOMContentLoaded',()=>{
++  const bar=document.getElementById('cta-bar');
++  const cancel=document.createElement('button');cancel.type='button';cancel.className='btn';cancel.textContent='إلغاء التعديل والاحتفاظ بالخطة الأصلية';cancel.hidden=true;cancel.style.cssText='position:fixed;bottom:88px;left:50%;transform:translateX(-50%);z-index:100;width:min(92vw,448px);background:var(--card);font-size:13px;justify-content:center';
++  cancel.onclick=()=>{S.editId=null;S.tab='mine';render();};bar.after(cancel);
++  const observer=new MutationObserver(()=>{cancel.hidden=!S.editId;});observer.observe(bar,{attributes:true,subtree:true,childList:true});
++  const q=document.getElementById('q-clr');q?.setAttribute('aria-label','مسح البحث');
++});
++</script></body>
+ </html>
