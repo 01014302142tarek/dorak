@@ -1,0 +1,44 @@
+{
+  "name": "دُرَك - منظّم زيارات البنوك",
+  "short_name": "دُرَك",
+  "description": "خطط لزيارتك. لا ينفذ حجزًا لدى البنك.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#EEF2F0",
+  "theme_color": "#0E2A33",
+  "orientation": "portrait-primary",
+  "lang": "ar",
+  "dir": "rtl",
+  "categories": [
+    "finance",
+    "productivity"
+  ],
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "خطة زيارة جديدة",
+      "short_name": "زيارة",
+      "url": "/",
+      "description": "ابدأ خطة زيارة جديدة"
+    }
+  ]
+}
