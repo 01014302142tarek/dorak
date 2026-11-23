@@ -1,5 +1,5 @@
-const CACHE = 'dorak-v3';
-const CORE  = ['/', '/index.html',
+const CACHE = 'dorak-v4-docs';
+const CORE  = ['/', '/index.html', '/manifest.json', '/icon-192.png', '/icon-512.png', '/apple-touch-icon.png',
   '/logos/aaib.png','/logos/abc.png','/logos/abe.png','/logos/abk.png','/logos/adcb.png',
   '/logos/adib.png','/logos/aib.png','/logos/alex.png','/logos/arab.png','/logos/awb.png',
   '/logos/baraka.png','/logos/ca.png','/logos/cairo.png','/logos/cib.png','/logos/citi.png',
@@ -18,7 +18,7 @@ self.addEventListener('install', e => {
 self.addEventListener('activate', e => {
   e.waitUntil(
     caches.keys().then(keys =>
-      Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))
+      Promise.all(keys.filter(k => k.startsWith('dorak-') && k !== CACHE).map(k => caches.delete(k)))
     )
   );
   self.clients.claim();
