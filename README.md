@@ -31,3 +31,4 @@ python3 -m http.server 8000
 npm install
 npm test    # Playwright smoke tests (tests/review.test.cjs)
 ```
+ Update: real bank logos, AR/EN bilingual, new app icon.
