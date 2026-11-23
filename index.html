@@ -302,6 +302,7 @@ textarea.inp{height:auto;min-height:76px;padding:10px 12px;resize:none;line-heig
 <div class="brand">
 <div class="logo"><img alt="Dorak" src="/icon-192.png"></div>
 <h1 class="brand-name">دُرَك</h1>
+<span id="app-version" style="font-size:10px;color:var(--muted);align-self:flex-end;padding-bottom:8px">v5</span>
 </div>
 <div style="display:flex;gap:8px;align-items:center">
 <button aria-label="Language / اللغة" class="icon-btn lang-btn" id="btn-lang" title="English / العربية" type="button">EN</button>
@@ -1390,10 +1391,26 @@ window.addEventListener('DOMContentLoaded',()=>{
 </script>
 
 <script>
+/* PWA update handling: check for a new sw on load, when the app regains focus and hourly;
+   reload once when a new version takes control or announces itself, so installed copies
+   pick up updates without manual cache clearing. */
+const APP_VERSION = 'v5-2026-11-24';
 if ('serviceWorker' in navigator) {
+  let reloading = false;
+  const reloadOnce = () => { if (reloading) return; reloading = true; location.reload(); };
+  const hadController = !!navigator.serviceWorker.controller;
+  navigator.serviceWorker.addEventListener('controllerchange', () => { if (hadController) reloadOnce(); });
+  navigator.serviceWorker.addEventListener('message', e => {
+    if (e.data && e.data.type === 'SW_UPDATED') reloadOnce();
+  });
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js')
-      .then(r => console.log('SW registered:', r.scope))
+      .then(r => {
+        console.log('SW registered:', r.scope);
+        r.update();
+        setInterval(() => r.update(), 60 * 60 * 1000);
+        document.addEventListener('visibilitychange', () => { if (!document.hidden) r.update(); });
+      })
       .catch(e => console.log('SW failed:', e));
   });
 }
@@ -1589,4 +1606,4 @@ document.addEventListener('DOMContentLoaded',()=>{
   }catch(_){}
 });
 </script></body>
-</html>
+  </html>
