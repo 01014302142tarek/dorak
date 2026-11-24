@@ -5,9 +5,9 @@
    - cache-first only for static assets (logos/icons) with background refresh
    - notifies open pages (SW_UPDATED) so they reload onto the new version
 */
-const VERSION = 'v5.7-2026-11-24';
+const VERSION = 'v5.8-2026-11-24';
 const CACHE = 'dorak-' + VERSION;
-const CORE  = ['/', '/index.html', '/manifest.json', '/icon-192.png', '/icon-512.png', '/apple-touch-icon.png',
+const CORE  = ['/', '/index.html', '/manifest.json', '/supabase.min.js', '/icon-192.png', '/icon-512.png', '/apple-touch-icon.png',
   '/logos/aaib.png','/logos/abc.png','/logos/abe.png','/logos/abk.png','/logos/adcb.png',
   '/logos/adib.png','/logos/aib.png','/logos/alex.png','/logos/arab.png','/logos/awb.png',
   '/logos/baraka.png','/logos/ca.png','/logos/cairo.png','/logos/cib.png','/logos/citi.png',
