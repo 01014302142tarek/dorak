@@ -14,9 +14,6 @@
 <link href="/icon-192.png?v=6" rel="icon" sizes="192x192" type="image/png"/>
 <link href="/icon-512.png?v=6" rel="icon" sizes="512x512" type="image/png"/>
 <meta content="yes" name="mobile-web-app-capable"/>
-<meta content="yes" name="apple-mobile-web-app-capable"/>
-<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
-<meta content="دُرَك" name="apple-mobile-web-app-title"/>
 <title>دُرَك – تنظيم زيارات البنوك</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -366,7 +363,7 @@ textarea.inp{height:auto;min-height:76px;padding:10px 12px;resize:none;line-heig
 <!-- HEADER -->
 <div class="top">
 <div class="brand">
-<div class="logo"><img alt="Dorak" src="/icon-192.png"></div>
+<div class="logo"><img alt="Dorak" src="/icon-192.png" width="44" height="44"></div>
 <h1 class="brand-name">دُرَك</h1>
 <span id="app-version" style="font-size:10px;color:var(--muted);align-self:flex-end;padding-bottom:8px">v5</span>
 </div>
@@ -486,7 +483,7 @@ textarea.inp{height:auto;min-height:76px;padding:10px 12px;resize:none;line-heig
 <!-- ═══ TAB: ME ═══ -->
 <div data-tab="me" hidden="">
 <h2 class="h1" data-i18n="me_h">حسابي</h2>
-<p class="sub" data-i18n="me_sub">بياناتك الأساسية — بتتحفظ على جهازك بس</p>
+<p class="sub" data-i18n="me_sub">بياناتك الأساسية — على جهازك ومتزامنة مع حسابك</p>
 <div class="card">
 <div class="grp" data-i18n="me_info_h">👤 البيانات الشخصية</div>
 <div class="field"><label for="me-name" data-i18n="f_name">الاسم الكامل</label><input autocomplete="name" class="inp" data-i18n-ph="f_name_ph" id="me-name" placeholder="محمد أحمد محمود…" type="text"/></div>
@@ -547,13 +544,13 @@ textarea.inp{height:auto;min-height:76px;padding:10px 12px;resize:none;line-heig
 <!-- ONBOARDING -->
 <div hidden="" id="onboard">
 <div class="sheet">
-<div class="logo-big"><img alt="دُرَك" src="/icon-192.png"/></div>
+<div class="logo-big"><img alt="دُرَك" src="/icon-192.png" width="44" height="44"/></div>
 <h2 data-i18n="ob_h">أهلًا بيك في دُرَك 👋</h2>
 <p class="sub2" data-i18n="ob_sub">منظّم زياراتك للبنك — خطط، افتكر، وروّح مطمّن</p>
 <div class="pts">
 <div class="pt"><span class="ic">🗓️</span><span data-i18n="ob_p1">خطط زيارتك خطوة بخطوة وشوفها على الشاشة الرئيسية</span></div>
 <div class="pt"><span class="ic">📋</span><span data-i18n="ob_p2">تشيكليست المستندات المطلوبة لكل خدمة قبل ما تتحرك</span></div>
-<div class="pt"><span class="ic">🔒</span><span data-i18n="ob_p3">بياناتك كلها على جهازك بس — مفيش حسابات ولا سيرفرات</span></div>
+<div class="pt"><span class="ic">🔒</span><span data-i18n="ob_p3">بياناتك بتتحفظ على جهازك وبتتزامن بحسابك على كل أجهزتك</span></div>
 </div>
 <div class="field"><label for="ob-name" data-i18n="ob_name">اسمك الأول (اختياري)</label><input class="inp" data-i18n-ph="ob_name_ph" id="ob-name" placeholder="طارق…" type="text"/></div>
 <button class="btn pri" data-i18n="ob_go" id="ob-go" style="width:100%;margin-top:12px" type="button">يلا نبدأ 🚀</button>
@@ -562,7 +559,7 @@ textarea.inp{height:auto;min-height:76px;padding:10px 12px;resize:none;line-heig
 <!-- AUTH GATE -->
 <div id="auth-gate" hidden="">
 <div class="ag-card">
-<div class="ag-logo"><img alt="دُرَك" src="/icon-192.png"/></div>
+<div class="ag-logo"><img alt="دُرَك" src="/icon-192.png" width="72" height="72"/></div>
 <h2 data-i18n="auth_h">سجّل دخولك لدُرَك</h2>
 <p class="sub2" data-i18n="auth_sub">زياراتك وخططك بتتزامن على كل أجهزتك</p>
 <button class="ag-google" id="ag-google" type="button"><svg height="20" viewbox="0 0 24 24" width="20"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z" fill="#4285F4"></path><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0012 23z" fill="#34A853"></path><path d="M5.84 14.1a6.6 6.6 0 010-4.2V7.06H2.18a11 11 0 000 9.88l3.66-2.84z" fill="#FBBC05"></path><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15A11 11 0 002.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z" fill="#EA4335"></path></svg><span data-i18n="auth_google">المتابعة بحساب Google</span></button>
@@ -744,7 +741,7 @@ ob_h:'أهلًا بيك في دُرَك 👋',ob_sub:'منظّم زياراتك 
 more_info_h:'📖 معلومات',more_help:'المساعدة — إزاي تستخدم دُرَك',more_privacy:'الخصوصية',more_about2:'عن دُرَك',
 pg_help_h:'المساعدة',pg_privacy_h:'الخصوصية',pg_about_h:'عن دُرَك',
 greet_m:'صباح الخير',greet_e:'مساء الخير',nav_book:'خطط',nav_mine:'زياراتي',nav_me:'حسابي',nav_more:'المزيد',
-me_h:'حسابي',me_sub:'بياناتك الأساسية — بتتحفظ على جهازك بس',me_info_h:'👤 البيانات الشخصية',me_save:'حفظ البيانات',me_saved:'✅ اتحفظت بياناتك',me_stats_v:'زيارة',me_stats_up:'قادمة',me_stats_fav:'بنك مفضل',
+me_h:'حسابي',me_sub:'بياناتك الأساسية — على جهازك ومتزامنة مع حسابك',me_info_h:'👤 البيانات الشخصية',me_save:'حفظ البيانات',me_saved:'✅ اتحفظت بياناتك',me_stats_v:'زيارة',me_stats_up:'قادمة',me_stats_fav:'بنك مفضل',
 more_h:'المزيد',more_sub:'إعدادات التطبيق والنسخ الاحتياطي',more_set_h:'⚙️ الإعدادات',more_theme:'الوضع الليلي',more_dark:'🌙 ليلي',more_light:'☀️ فاتح',more_lang:'اللغة',more_about_h:'ℹ️ عن دُرَك',more_about_t:'دُرَك منظّم زيارات شخصي للبنوك. بياناتك على جهازك، وبتتزامن مع حسابك لو سجّلت دخولك.',
 app_title:'دُرَك – تنظيم زيارات البنوك',meta_desc:'منظّم زيارات شخصي للبنوك، لا ينفذ حجزًا لدى البنك.',
 pill:'نظّم زيارتك',tab_book:'خطط لزيارة',tab_mine:'زياراتي',
@@ -790,7 +787,7 @@ ob_h:'Welcome to Dorak 👋',ob_sub:'Your bank-visit organizer — plan, remembe
 more_info_h:'📖 Info',more_help:'Help — how to use Dorak',more_privacy:'Privacy',more_about2:'About Dorak',
 pg_help_h:'Help',pg_privacy_h:'Privacy',pg_about_h:'About Dorak',
 greet_m:'Good morning',greet_e:'Good evening',nav_book:'Plan',nav_mine:'My visits',nav_me:'Account',nav_more:'More',
-me_h:'My account',me_sub:'Your basic details, stored on this device only',me_info_h:'👤 Personal details',me_save:'Save details',me_saved:'✅ Details saved',me_stats_v:'visits',me_stats_up:'upcoming',me_stats_fav:'favorite banks',
+me_h:'My account',me_sub:'Your basic details, kept on this device and synced to your account',me_info_h:'👤 Personal details',me_save:'Save details',me_saved:'✅ Details saved',me_stats_v:'visits',me_stats_up:'upcoming',me_stats_fav:'favorite banks',
 more_h:'More',more_sub:'App settings and backup',more_set_h:'⚙️ Settings',more_theme:'Dark mode',more_dark:'🌙 Dark',more_light:'☀️ Light',more_lang:'Language',more_about_h:'ℹ️ About Dorak',more_about_t:'Dorak is a personal bank-visit organizer. Your data stays on your device and syncs to your account when you sign in.',
 app_title:'Dorak – Bank Visit Organizer',meta_desc:'A personal bank-visit organizer. It does not book with the bank.',
 pill:'Plan your visit',tab_book:'Plan a visit',tab_mine:'My visits',
@@ -1319,8 +1316,8 @@ const PAGES={
 help:{
  h:()=>t('pg_help_h'),
  b:()=>lang==='en'
-  ?`<ul><li><b>Plan a visit:</b> choose your bank, the service, the day and time, then your details. Review and save — the plan lives on your device.</li><li><b>Documents:</b> every service shows a checklist of what to bring. Tick items off as you pack them.</li><li><b>My visits:</b> upcoming and past plans, with options to share, add to calendar, reschedule or cancel.</li><li><b>Backup:</b> from More, download a backup file (or copy its text) and restore it anytime — useful when changing phones.</li><li><b>Install on iPhone:</b> open in Safari, tap Share, then "Add to Home Screen".</li></ul>`
-  :`<ul><li><b>خطط لزيارة:</b> اختار البنك، الخدمة، اليوم والميعاد، وبعدين بياناتك. راجع واحفظ — الخطة بتتحفظ على جهازك.</li><li><b>المستندات:</b> كل خدمة بتعرض تشيكليست بالمطلوب منك. علّم على كل حاجة جهزتها.</li><li><b>زياراتي:</b> مواعيدك القادمة والسابقة، مع مشاركة وإضافة للتقويم وإعادة جدولة وإلغاء.</li><li><b>النسخة الاحتياطية:</b> من «المزيد» نزّل نسخة (أو انسخ نصها) واسترجعها في أي وقت — مفيد لما تغيّر موبايلك.</li><li><b>التثبيت على الآيفون:</b> افتح الموقع في سفاري، اضغط مشاركة، وبعدين «Add to Home Screen».</li></ul>`},
+  ?`<ul><li><b>Plan a visit:</b> choose your bank, the service, the day and time, then your details. Review and save — the plan lives on your device and syncs to your account.</li><li><b>Documents:</b> every service shows a checklist of what to bring. Tick items off as you pack them.</li><li><b>My visits:</b> upcoming and past plans, with options to share, add to calendar, reschedule or cancel.</li><li><b>Backup:</b> from More, download a backup file (or copy its text) and restore it anytime — useful when changing phones.</li><li><b>Install on iPhone:</b> open in Safari, tap Share, then "Add to Home Screen".</li></ul>`
+  :`<ul><li><b>خطط لزيارة:</b> اختار البنك، الخدمة، اليوم والميعاد، وبعدين بياناتك. راجع واحفظ — الخطة بتتحفظ على جهازك وبتتزامن مع حسابك.</li><li><b>المستندات:</b> كل خدمة بتعرض تشيكليست بالمطلوب منك. علّم على كل حاجة جهزتها.</li><li><b>زياراتي:</b> مواعيدك القادمة والسابقة، مع مشاركة وإضافة للتقويم وإعادة جدولة وإلغاء.</li><li><b>النسخة الاحتياطية:</b> من «المزيد» نزّل نسخة (أو انسخ نصها) واسترجعها في أي وقت — مفيد لما تغيّر موبايلك.</li><li><b>التثبيت على الآيفون:</b> افتح الموقع في سفاري، اضغط مشاركة، وبعدين «Add to Home Screen».</li></ul>`},
 privacy:{
  h:()=>t('pg_privacy_h'),
  b:()=>lang==='en'
