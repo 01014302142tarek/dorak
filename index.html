@@ -300,6 +300,22 @@ textarea.inp{height:auto;min-height:76px;padding:10px 12px;resize:none;line-heig
 
 
 @media(max-width:480px){.boardwrap{position:relative;top:auto}.cta .btn{min-width:0;padding-inline:12px;font-size:15px}.pill{max-width:96px;text-align:center}}
+/* wave5: auth gate */
+#auth-gate{position:fixed;inset:0;z-index:100;background:var(--paper);display:flex;align-items:center;justify-content:center;padding:20px;overflow-y:auto}
+#auth-gate[hidden]{display:none}
+.ag-card{width:min(400px,100%);background:var(--card);border:1px solid var(--line);border-radius:24px;padding:28px 22px;box-shadow:var(--shadow-lg);text-align:center}
+.ag-logo{width:72px;height:72px;border-radius:20px;margin:0 auto 14px;overflow:hidden;box-shadow:var(--shadow-lg)}
+.ag-logo img{width:100%;height:100%}
+.ag-card h2{font-size:21px;font-weight:800;margin:0 0 4px}
+.ag-card .sub2{color:var(--muted);font-size:13px;margin-bottom:18px}
+.ag-google{width:100%;height:50px;border-radius:14px;border:1.5px solid var(--line2);background:var(--card);display:flex;align-items:center;justify-content:center;gap:10px;font-weight:700;font-size:15px;color:var(--ink);cursor:pointer;font-family:var(--ui)}
+.ag-or{display:flex;align-items:center;gap:10px;margin:14px 0;color:var(--muted);font-size:12px}
+.ag-or::before,.ag-or::after{content:"";flex:1;height:1px;background:var(--line)}
+.ag-card .inp{margin-bottom:10px}
+.ag-err{background:#FDECEC;color:var(--bad);border-radius:12px;padding:8px 10px;font-size:13px;margin-bottom:10px;font-weight:600}
+[data-theme="dark"] .ag-err{background:rgba(224,72,60,.12)}
+.ag-switch{background:none;border:0;color:var(--pri);font-weight:700;margin-top:12px;cursor:pointer;font-size:14px;font-family:var(--ui)}
+#ag-go{width:100%}
 /* wave4: info pages + onboarding */
 .pg{position:fixed;inset:0;z-index:60;background:rgba(14,42,51,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);overflow-y:auto;padding:24px 16px 80px}
 .pg .sheet{max-width:480px;margin:0 auto;background:var(--card);border-radius:20px;padding:20px 16px 24px;box-shadow:var(--shadow-lg)}
@@ -488,6 +504,7 @@ textarea.inp{height:auto;min-height:76px;padding:10px 12px;resize:none;line-heig
 <div class="grp" data-i18n="more_set_h">⚙️ الإعدادات</div>
 <div class="prow"><span class="t" data-i18n="more_theme">الوضع الليلي</span><button class="btn sm ghost" id="more-dark" type="button">🌙 ليلي</button></div>
 <div class="prow"><span class="t" data-i18n="more_lang">اللغة</span><button class="btn sm ghost" id="more-lang" type="button">English</button></div>
+<div class="prow"><span class="t" data-i18n="logout">تسجيل الخروج</span><button class="btn sm ghost" id="btn-logout" type="button">⎋ خروج</button></div>
 </div>
 <div class="card" style="margin-top:16px">
 <div class="grp" data-i18n="backup_h">💾 نسخة احتياطية</div>
@@ -540,6 +557,21 @@ textarea.inp{height:auto;min-height:76px;padding:10px 12px;resize:none;line-heig
 </div>
 <div class="field"><label for="ob-name" data-i18n="ob_name">اسمك الأول (اختياري)</label><input class="inp" data-i18n-ph="ob_name_ph" id="ob-name" placeholder="طارق…" type="text"/></div>
 <button class="btn pri" data-i18n="ob_go" id="ob-go" style="width:100%;margin-top:12px" type="button">يلا نبدأ 🚀</button>
+</div>
+</div>
+<!-- AUTH GATE -->
+<div id="auth-gate" hidden="">
+<div class="ag-card">
+<div class="ag-logo"><img alt="دُرَك" src="/icon-192.png"/></div>
+<h2 data-i18n="auth_h">سجّل دخولك لدُرَك</h2>
+<p class="sub2" data-i18n="auth_sub">زياراتك وخططك بتتزامن على كل أجهزتك</p>
+<button class="ag-google" id="ag-google" type="button"><svg height="20" viewbox="0 0 24 24" width="20"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z" fill="#4285F4"></path><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0012 23z" fill="#34A853"></path><path d="M5.84 14.1a6.6 6.6 0 010-4.2V7.06H2.18a11 11 0 000 9.88l3.66-2.84z" fill="#FBBC05"></path><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15A11 11 0 002.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z" fill="#EA4335"></path></svg><span data-i18n="auth_google">المتابعة بحساب Google</span></button>
+<div class="ag-or"><span data-i18n="auth_or">أو</span></div>
+<input autocomplete="email" class="inp" data-i18n-ph="auth_email" dir="ltr" id="ag-email" placeholder="name@email.com" style="text-align:end" type="email"/>
+<input autocomplete="current-password" class="inp" data-i18n-ph="auth_pass" dir="ltr" id="ag-pass" placeholder="••••••••" style="text-align:end" type="password"/>
+<div class="ag-err" hidden="" id="ag-err"></div>
+<button class="btn pri" data-i18n="auth_login" id="ag-go" type="button">تسجيل الدخول</button>
+<button class="ag-switch" data-i18n="auth_to_signup" id="ag-switch" type="button">مستخدم جديد؟ سجّل حساب</button>
 </div>
 </div>
 <!-- TOAST -->
@@ -707,12 +739,13 @@ try{lang=localStorage.getItem('dorak_lang')||'ar';}catch(_){}
 if(lang!=='ar'&&lang!=='en')lang='ar';
 const I18N={
 ar:{
-ob_h:'أهلًا بيك في دُرَك 👋',ob_sub:'منظّم زياراتك للبنك — خطط، افتكر، وروّح مطمّن',ob_p1:'خطط زيارتك خطوة بخطوة وشوفها على الشاشة الرئيسية',ob_p2:'تشيكليست المستندات المطلوبة لكل خدمة قبل ما تتحرك',ob_p3:'بياناتك كلها على جهازك بس — مفيش حسابات ولا سيرفرات',ob_name:'اسمك الأول (اختياري)',ob_name_ph:'طارق…',ob_go:'يلا نبدأ 🚀',
+auth_h:'سجّل دخولك لدُرَك',auth_sub:'زياراتك وخططك بتتزامن على كل أجهزتك',auth_google:'المتابعة بحساب Google',auth_or:'أو',auth_email:'البريد الإلكتروني',auth_pass:'كلمة السر (٦ حروف أو أكتر)',auth_login:'تسجيل الدخول',auth_signup:'إنشاء الحساب',auth_to_signup:'مستخدم جديد؟ سجّل حساب',auth_to_login:'عندك حساب؟ سجّل دخولك',auth_err:'حصل خطأ — جرّب تاني',auth_err_fields:'راجع الإيميل وكلمة السر',auth_err_login:'الإيميل أو كلمة السر غلط',logout:'تسجيل الخروج',
+ob_h:'أهلًا بيك في دُرَك 👋',ob_sub:'منظّم زياراتك للبنك — خطط، افتكر، وروّح مطمّن',ob_p1:'خطط زيارتك خطوة بخطوة وشوفها على الشاشة الرئيسية',ob_p2:'تشيكليست المستندات المطلوبة لكل خدمة قبل ما تتحرك',ob_p3:'بياناتك بتتحفظ على جهازك وبتتزامن بحسابك على كل أجهزتك',ob_name:'اسمك الأول (اختياري)',ob_name_ph:'طارق…',ob_go:'يلا نبدأ 🚀',
 more_info_h:'📖 معلومات',more_help:'المساعدة — إزاي تستخدم دُرَك',more_privacy:'الخصوصية',more_about2:'عن دُرَك',
 pg_help_h:'المساعدة',pg_privacy_h:'الخصوصية',pg_about_h:'عن دُرَك',
 greet_m:'صباح الخير',greet_e:'مساء الخير',nav_book:'خطط',nav_mine:'زياراتي',nav_me:'حسابي',nav_more:'المزيد',
 me_h:'حسابي',me_sub:'بياناتك الأساسية — بتتحفظ على جهازك بس',me_info_h:'👤 البيانات الشخصية',me_save:'حفظ البيانات',me_saved:'✅ اتحفظت بياناتك',me_stats_v:'زيارة',me_stats_up:'قادمة',me_stats_fav:'بنك مفضل',
-more_h:'المزيد',more_sub:'إعدادات التطبيق والنسخ الاحتياطي',more_set_h:'⚙️ الإعدادات',more_theme:'الوضع الليلي',more_dark:'🌙 ليلي',more_light:'☀️ فاتح',more_lang:'اللغة',more_about_h:'ℹ️ عن دُرَك',more_about_t:'دُرَك منظّم زيارات شخصي للبنوك. بياناتك كلها على جهازك — مفيش حسابات ولا سيرفرات.',
+more_h:'المزيد',more_sub:'إعدادات التطبيق والنسخ الاحتياطي',more_set_h:'⚙️ الإعدادات',more_theme:'الوضع الليلي',more_dark:'🌙 ليلي',more_light:'☀️ فاتح',more_lang:'اللغة',more_about_h:'ℹ️ عن دُرَك',more_about_t:'دُرَك منظّم زيارات شخصي للبنوك. بياناتك على جهازك، وبتتزامن مع حسابك لو سجّلت دخولك.',
 app_title:'دُرَك – تنظيم زيارات البنوك',meta_desc:'منظّم زيارات شخصي للبنوك، لا ينفذ حجزًا لدى البنك.',
 pill:'نظّم زيارتك',tab_book:'خطط لزيارة',tab_mine:'زياراتي',
 s0_h:'اختار البنك',s0_sub:'من أي بنك عاوز تاخد الخدمة؟',
@@ -752,12 +785,13 @@ backup_h:'💾 نسخة احتياطية',export_btn:'⬇️ تنزيل نسخة
 ios_hint:'📲 ثبّت دُرَك على موبايلك: من زرار المشاركة في سفاري اختار «Add to Home Screen»',
 hours_note:'🕐 مواعيد عمل أغلب البنوك: الأحد للخميس من 8:30 صباحًا حتى 3 عصرًا (بعض الفروع حتى 5). الجمعة والسبت إجازة. المواعيد بتختلف من فرع لفرع — اتأكد من فرعك أو الخط الساخن.'},
 en:{
-ob_h:'Welcome to Dorak 👋',ob_sub:'Your bank-visit organizer — plan, remember, go relaxed',ob_p1:'Plan your visit step by step and see it on the home screen',ob_p2:'A checklist of required documents for every service before you go',ob_p3:'All your data stays on this device — no accounts, no servers',ob_name:'Your first name (optional)',ob_name_ph:'Tariq…',ob_go:"Let's start 🚀",
+auth_h:'Sign in to Dorak',auth_sub:'Your visits and plans sync across your devices',auth_google:'Continue with Google',auth_or:'or',auth_email:'Email address',auth_pass:'Password (6+ characters)',auth_login:'Sign in',auth_signup:'Create account',auth_to_signup:'New here? Create an account',auth_to_login:'Have an account? Sign in',auth_err:'Something went wrong — try again',auth_err_fields:'Check the email and password',auth_err_login:'Wrong email or password',logout:'Sign out',
+ob_h:'Welcome to Dorak 👋',ob_sub:'Your bank-visit organizer — plan, remember, go relaxed',ob_p1:'Plan your visit step by step and see it on the home screen',ob_p2:'A checklist of required documents for every service before you go',ob_p3:'Your data is stored on this device and synced to your account across devices',ob_name:'Your first name (optional)',ob_name_ph:'Tariq…',ob_go:"Let's start 🚀",
 more_info_h:'📖 Info',more_help:'Help — how to use Dorak',more_privacy:'Privacy',more_about2:'About Dorak',
 pg_help_h:'Help',pg_privacy_h:'Privacy',pg_about_h:'About Dorak',
 greet_m:'Good morning',greet_e:'Good evening',nav_book:'Plan',nav_mine:'My visits',nav_me:'Account',nav_more:'More',
 me_h:'My account',me_sub:'Your basic details, stored on this device only',me_info_h:'👤 Personal details',me_save:'Save details',me_saved:'✅ Details saved',me_stats_v:'visits',me_stats_up:'upcoming',me_stats_fav:'favorite banks',
-more_h:'More',more_sub:'App settings and backup',more_set_h:'⚙️ Settings',more_theme:'Dark mode',more_dark:'🌙 Dark',more_light:'☀️ Light',more_lang:'Language',more_about_h:'ℹ️ About Dorak',more_about_t:'Dorak is a personal bank-visit organizer. All your data stays on your device — no accounts, no servers.',
+more_h:'More',more_sub:'App settings and backup',more_set_h:'⚙️ Settings',more_theme:'Dark mode',more_dark:'🌙 Dark',more_light:'☀️ Light',more_lang:'Language',more_about_h:'ℹ️ About Dorak',more_about_t:'Dorak is a personal bank-visit organizer. Your data stays on your device and syncs to your account when you sign in.',
 app_title:'Dorak – Bank Visit Organizer',meta_desc:'A personal bank-visit organizer. It does not book with the bank.',
 pill:'Plan your visit',tab_book:'Plan a visit',tab_mine:'My visits',
 s0_h:'Choose your bank',s0_sub:'Which bank do you need the service from?',
@@ -877,6 +911,7 @@ try {
 } catch(_){}
 const save = () => {
   try { localStorage.setItem(SAVE_KEY, JSON.stringify({bookings:S.bookings,name:S.name,phone:S.phone,gov:S.gov})); } catch(_){}
+  window.queueSync?.();
 };
 
 /* ── dark mode ── */
@@ -894,7 +929,7 @@ const initTheme = () => {
 
 /* ── favorites ── */
 const getFavs = () => { try { return new Set(JSON.parse(localStorage.getItem('dorak_favs')||'[]')); } catch(_) { return new Set(); }};
-const saveFavs = set => { try { localStorage.setItem('dorak_favs',JSON.stringify([...set])); } catch(_){} };
+const saveFavs = set => { try { localStorage.setItem('dorak_favs',JSON.stringify([...set])); } catch(_){} window.queueSync?.(); };
 const toggleFav = id => { const f=getFavs(); f.has(id)?f.delete(id):f.add(id); saveFavs(f); };
 const isFav = id => getFavs().has(id);
 
@@ -1289,8 +1324,8 @@ help:{
 privacy:{
  h:()=>t('pg_privacy_h'),
  b:()=>lang==='en'
-  ?`<ul><li>Dorak stores everything — plans, name, phone, favorites, document checks — in your browser's local storage on this device only.</li><li>Nothing is sent to any server. There are no accounts, no analytics, no tracking.</li><li>Your data is never shared with any bank. Dorak does not book with the bank; it organizes your personal plan.</li><li>Backup files you export stay with you — keep them private, they contain your details.</li><li>Clearing the site's data from your browser settings erases everything permanently.</li></ul>`
-  :`<ul><li>دُرَك بيحفظ كل حاجة — الخطط، الاسم، الموبايل، المفضلة، علامات المستندات — في تخزين المتصفح على جهازك بس.</li><li>مفيش أي بيانات بتتبعت لأي سيرفر. مفيش حسابات، مفيش تحليلات، مفيش تتبع.</li><li>بياناتك مش بتتشارك مع أي بنك. دُرَك مش بيحجز لدى البنك؛ بيرتّب خطتك الشخصية بس.</li><li>ملفات النسخ الاحتياطي اللي بتنزّلها بتفضل معاك — خلّيها خاصة، فيها بياناتك.</li><li>مسح بيانات الموقع من إعدادات المتصفح بيمسح كل حاجة نهائيًا.</li></ul>`},
+  ?`<ul><li>Dorak stores everything — plans, name, phone, favorites, document checks — in your browser's local storage on this device only.</li><li>If you sign in, a copy of your data (plans and basic details) syncs to your secure cloud account so you can restore it on any device — no one else can access it. No analytics, no tracking.</li><li>Your data is never shared with any bank. Dorak does not book with the bank; it organizes your personal plan.</li><li>Backup files you export stay with you — keep them private, they contain your details.</li><li>Clearing the site's data from your browser settings erases everything permanently.</li></ul>`
+  :`<ul><li>دُرَك بيحفظ كل حاجة — الخطط، الاسم، الموبايل، المفضلة، علامات المستندات — في تخزين المتصفح على جهازك بس.</li><li>لو سجّلت دخولك، نسخة من بياناتك (خططك وبياناتك الأساسية) بتتزامن على حسابك السحابي الآمن عشان ترجّعها على أي جهاز — محدش غيرك يقدر يوصلها. مفيش تحليلات ولا تتبع.</li><li>بياناتك مش بتتشارك مع أي بنك. دُرَك مش بيحجز لدى البنك؛ بيرتّب خطتك الشخصية بس.</li><li>ملفات النسخ الاحتياطي اللي بتنزّلها بتفضل معاك — خلّيها خاصة، فيها بياناتك.</li><li>مسح بيانات الموقع من إعدادات المتصفح بيمسح كل حاجة نهائيًا.</li></ul>`},
 about:{
  h:()=>t('pg_about_h'),
  b:()=>lang==='en'
@@ -1451,7 +1486,7 @@ const confirmBooking = () => {
   try {
     localStorage.setItem(SAVE_KEY,JSON.stringify({bookings:next,name:bk.name,phone:bk.phone,gov:bk.gov}));
   } catch(error) { showToast(t('toast_savefail'));return; }
-  S.bookings=next;S._lastId=id;S.editId=null;pushRecent(S.bank);S.step=5;render();updateBoard();
+  S.bookings=next;S._lastId=id;S.editId=null;pushRecent(S.bank);S.step=5;render();updateBoard();window.queueSync?.();
   showToast(t('toast_saved'));
 };
 
@@ -1830,5 +1865,69 @@ document.addEventListener('DOMContentLoaded',()=>{
     }
   }catch(_){}
 });
+</script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+/* stage 4 — auth gate + cloud sync */
+const SB_URL='https://aukbzuxffwwvfxdddbbp.supabase.co';
+const SB_KEY='sb_publishable_VIsenb6TdAtsT_0zFev78Q_qWk7GDir';
+const sb=window.supabase.createClient(SB_URL,SB_KEY);
+let agMode='login', currentUser=null, syncTimer=null;
+const agE=id=>document.getElementById(id);
+const agErr=m=>{const e=agE('ag-err'); if(!e)return; if(!m){e.hidden=true;return;} e.textContent=m; e.hidden=false;};
+const setGate=show=>{const g=agE('auth-gate'); if(g) g.hidden=!show;};
+const applyRemote=d=>{
+  try{
+    if(d.name!==undefined) S.name=d.name||'';
+    if(d.phone!==undefined) S.phone=d.phone||'';
+    if(d.gov!==undefined) S.gov=d.gov||'';
+    if(Array.isArray(d.bookings)) S.bookings=d.bookings;
+    if(Array.isArray(d.favs)) saveFavs(new Set(d.favs));
+    if(d.docs&&typeof d.docs==='object'){ try{localStorage.setItem(DOCS_KEY,JSON.stringify(d.docs));}catch(_){}}
+    save(); render();
+  }catch(_){}
+};
+const syncPush=async()=>{
+  if(!currentUser) return;
+  const payload={v:1,app:'dorak',name:S.name,phone:S.phone,gov:S.gov,bookings:S.bookings,favs:[...getFavs()],docs:getDocChecks()};
+  try{ await sb.from('user_sync').upsert({id:currentUser.id,data:payload,updated_at:new Date().toISOString()}); }catch(_){}
+};
+window.queueSync=()=>{ if(!currentUser) return; clearTimeout(syncTimer); syncTimer=setTimeout(syncPush,1200); };
+const syncPull=async u=>{
+  try{
+    const {data,error}=await sb.from('user_sync').select('data').eq('id',u.id).maybeSingle();
+    if(error) return;
+    if(data&&data.data&&(data.data.name||((data.data.bookings||[]).length))) applyRemote(data.data);
+    else syncPush();
+  }catch(_){}
+};
+sb.auth.onAuthStateChange((ev,session)=>{
+  currentUser=(session&&session.user)||null;
+  if(currentUser){ setGate(false); syncPull(currentUser); }
+  else setGate(true);
+});
+agE('ag-google').addEventListener('click',async()=>{
+  agErr(null);
+  const {error}=await sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.origin}});
+  if(error) agErr(t('auth_err'));
+});
+agE('ag-switch').addEventListener('click',()=>{
+  agMode=agMode==='login'?'signup':'login';
+  agE('ag-go').textContent=t(agMode==='login'?'auth_login':'auth_signup');
+  agE('ag-switch').textContent=t(agMode==='login'?'auth_to_signup':'auth_to_login');
+  agErr(null);
+});
+agE('ag-go').addEventListener('click',async()=>{
+  agErr(null);
+  const email=agE('ag-email').value.trim(), pass=agE('ag-pass').value;
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)||pass.length<6){ agErr(t('auth_err_fields')); return; }
+  agE('ag-go').disabled=true;
+  try{
+    const fn=agMode==='login'?'signInWithPassword':'signUp';
+    const {error}=await sb.auth[fn]({email,password:pass});
+    if(error) agErr(/invalid/i.test(error.message||'')?t('auth_err_login'):t('auth_err'));
+  }finally{ agE('ag-go').disabled=false; }
+});
+const bl=agE('btn-logout'); if(bl) bl.addEventListener('click',()=>sb.auth.signOut());
+(async()=>{ try{ const {data:{session}}=await sb.auth.getSession(); if(!session) setGate(true); }catch(_){ setGate(true); } })();
 </script></body>
 </html>
