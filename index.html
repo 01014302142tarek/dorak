@@ -300,6 +300,27 @@ textarea.inp{height:auto;min-height:76px;padding:10px 12px;resize:none;line-heig
 
 
 @media(max-width:480px){.boardwrap{position:relative;top:auto}.cta .btn{min-width:0;padding-inline:12px;font-size:15px}.pill{max-width:96px;text-align:center}}
+/* wave4: info pages + onboarding */
+.pg{position:fixed;inset:0;z-index:60;background:rgba(14,42,51,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);overflow-y:auto;padding:24px 16px 80px}
+.pg .sheet{max-width:480px;margin:0 auto;background:var(--card);border-radius:20px;padding:20px 16px 24px;box-shadow:var(--shadow-lg)}
+.pg .ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.pg .pt{font-weight:800;font-size:17px}
+.pg .px{width:34px;height:34px;border-radius:10px;border:1.5px solid var(--line2);background:transparent;font-size:16px;display:grid;place-items:center;cursor:pointer;color:var(--ink)}
+.pg .pb{font-size:14px;line-height:1.9;color:var(--ink)}
+.pg .pb b{color:var(--pri2)}
+.pg .pb ul{margin:6px 0;padding-inline-start:20px}
+.pg .pb li{margin:4px 0}
+.prow.linkrow{cursor:pointer;border-bottom:1px solid var(--line);width:100%;background:transparent;border-top:0;border-inline:0;font-family:var(--ui);text-align:start}
+.prow.linkrow .chev{color:var(--muted);font-size:18px}
+#onboard{position:fixed;inset:0;z-index:70;background:rgba(10,20,17,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:flex;align-items:flex-end;justify-content:center;padding:0}
+#onboard .sheet{background:var(--card);border-radius:24px 24px 0 0;max-width:480px;width:100%;padding:26px 20px calc(24px + env(safe-area-inset-bottom));box-shadow:var(--shadow-lg)}
+#onboard .logo-big{width:64px;height:64px;border-radius:18px;background:linear-gradient(135deg,var(--pri),var(--pri2));display:grid;place-items:center;margin:0 auto 12px;box-shadow:var(--shadow-lg)}
+#onboard .logo-big img{width:44px;height:44px;border-radius:10px}
+#onboard h2{text-align:center;font-size:21px;font-weight:800;margin:0 0 4px}
+#onboard .sub2{text-align:center;color:var(--muted);font-size:13px;margin-bottom:14px}
+#onboard .pts{display:grid;gap:8px;margin-bottom:16px}
+#onboard .pt{display:flex;gap:10px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:10px 12px;font-size:13px;font-weight:600}
+#onboard .pt .ic{font-size:18px}
 /* wave3: hero + bottom nav + profile */
 .hero{display:flex;align-items:center;gap:12px;padding:16px 2px 2px}
 .hero .ava{width:46px;height:46px;border-radius:14px;background:linear-gradient(135deg,var(--pri),var(--pri2));color:#fff;display:grid;place-items:center;font-size:20px;font-weight:800;flex:none;box-shadow:var(--shadow-lg)}
@@ -478,8 +499,10 @@ textarea.inp{height:auto;min-height:76px;padding:10px 12px;resize:none;line-heig
 <input accept="application/json,.json" hidden="" id="import-file" type="file"/>
 </div>
 <div class="card" style="margin-top:16px">
-<div class="grp" data-i18n="more_about_h">ℹ️ عن دُرَك</div>
-<p data-i18n="more_about_t" style="font-size:13px;color:var(--muted);line-height:1.7;margin:4px 0 2px">دُرَك منظّم زيارات شخصي للبنوك. بياناتك كلها على جهازك — مفيش حسابات ولا سيرفرات.</p>
+<div class="grp" data-i18n="more_info_h">📖 معلومات</div>
+<button class="prow linkrow" data-page="help" type="button"><span class="t" data-i18n="more_help">المساعدة — إزاي تستخدم دُرَك</span><span class="chev">‹</span></button>
+<button class="prow linkrow" data-page="privacy" type="button"><span class="t" data-i18n="more_privacy">الخصوصية</span><span class="chev">‹</span></button>
+<button class="prow linkrow" data-page="about" type="button"><span class="t" data-i18n="more_about2">عن دُرَك</span><span class="chev">‹</span></button>
 </div>
 </div>
 </div><!-- /app -->
@@ -495,6 +518,28 @@ textarea.inp{height:auto;min-height:76px;padding:10px 12px;resize:none;line-heig
 <div class="in">
 <button class="btn sm ghost" hidden="" id="btn-back" type="button"><svg fill="none" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" viewbox="0 0 24 24" width="17"><polyline points="15 18 9 12 15 6"></polyline></svg><span data-i18n="back">رجوع</span></button>
 <button class="btn pri" disabled="" id="btn-next" type="button">اختار البنك أولًا</button>
+</div>
+</div>
+<!-- INFO PAGE MODAL -->
+<div class="pg" hidden="" id="pg-modal">
+<div class="sheet">
+<div class="ph"><span class="pt" id="pg-title"></span><button class="px" id="pg-close" type="button">×</button></div>
+<div class="pb" id="pg-body"></div>
+</div>
+</div>
+<!-- ONBOARDING -->
+<div hidden="" id="onboard">
+<div class="sheet">
+<div class="logo-big"><img alt="دُرَك" src="/icon-192.png"/></div>
+<h2 data-i18n="ob_h">أهلًا بيك في دُرَك 👋</h2>
+<p class="sub2" data-i18n="ob_sub">منظّم زياراتك للبنك — خطط، افتكر، وروّح مطمّن</p>
+<div class="pts">
+<div class="pt"><span class="ic">🗓️</span><span data-i18n="ob_p1">خطط زيارتك خطوة بخطوة وشوفها على الشاشة الرئيسية</span></div>
+<div class="pt"><span class="ic">📋</span><span data-i18n="ob_p2">تشيكليست المستندات المطلوبة لكل خدمة قبل ما تتحرك</span></div>
+<div class="pt"><span class="ic">🔒</span><span data-i18n="ob_p3">بياناتك كلها على جهازك بس — مفيش حسابات ولا سيرفرات</span></div>
+</div>
+<div class="field"><label for="ob-name" data-i18n="ob_name">اسمك الأول (اختياري)</label><input class="inp" data-i18n-ph="ob_name_ph" id="ob-name" placeholder="طارق…" type="text"/></div>
+<button class="btn pri" data-i18n="ob_go" id="ob-go" style="width:100%;margin-top:12px" type="button">يلا نبدأ 🚀</button>
 </div>
 </div>
 <!-- TOAST -->
@@ -662,6 +707,9 @@ try{lang=localStorage.getItem('dorak_lang')||'ar';}catch(_){}
 if(lang!=='ar'&&lang!=='en')lang='ar';
 const I18N={
 ar:{
+ob_h:'أهلًا بيك في دُرَك 👋',ob_sub:'منظّم زياراتك للبنك — خطط، افتكر، وروّح مطمّن',ob_p1:'خطط زيارتك خطوة بخطوة وشوفها على الشاشة الرئيسية',ob_p2:'تشيكليست المستندات المطلوبة لكل خدمة قبل ما تتحرك',ob_p3:'بياناتك كلها على جهازك بس — مفيش حسابات ولا سيرفرات',ob_name:'اسمك الأول (اختياري)',ob_name_ph:'طارق…',ob_go:'يلا نبدأ 🚀',
+more_info_h:'📖 معلومات',more_help:'المساعدة — إزاي تستخدم دُرَك',more_privacy:'الخصوصية',more_about2:'عن دُرَك',
+pg_help_h:'المساعدة',pg_privacy_h:'الخصوصية',pg_about_h:'عن دُرَك',
 greet_m:'صباح الخير',greet_e:'مساء الخير',nav_book:'خطط',nav_mine:'زياراتي',nav_me:'حسابي',nav_more:'المزيد',
 me_h:'حسابي',me_sub:'بياناتك الأساسية — بتتحفظ على جهازك بس',me_info_h:'👤 البيانات الشخصية',me_save:'حفظ البيانات',me_saved:'✅ اتحفظت بياناتك',me_stats_v:'زيارة',me_stats_up:'قادمة',me_stats_fav:'بنك مفضل',
 more_h:'المزيد',more_sub:'إعدادات التطبيق والنسخ الاحتياطي',more_set_h:'⚙️ الإعدادات',more_theme:'الوضع الليلي',more_dark:'🌙 ليلي',more_light:'☀️ فاتح',more_lang:'اللغة',more_about_h:'ℹ️ عن دُرَك',more_about_t:'دُرَك منظّم زيارات شخصي للبنوك. بياناتك كلها على جهازك — مفيش حسابات ولا سيرفرات.',
@@ -704,6 +752,9 @@ backup_h:'💾 نسخة احتياطية',export_btn:'⬇️ تنزيل نسخة
 ios_hint:'📲 ثبّت دُرَك على موبايلك: من زرار المشاركة في سفاري اختار «Add to Home Screen»',
 hours_note:'🕐 مواعيد عمل أغلب البنوك: الأحد للخميس من 8:30 صباحًا حتى 3 عصرًا (بعض الفروع حتى 5). الجمعة والسبت إجازة. المواعيد بتختلف من فرع لفرع — اتأكد من فرعك أو الخط الساخن.'},
 en:{
+ob_h:'Welcome to Dorak 👋',ob_sub:'Your bank-visit organizer — plan, remember, go relaxed',ob_p1:'Plan your visit step by step and see it on the home screen',ob_p2:'A checklist of required documents for every service before you go',ob_p3:'All your data stays on this device — no accounts, no servers',ob_name:'Your first name (optional)',ob_name_ph:'Tariq…',ob_go:"Let's start 🚀",
+more_info_h:'📖 Info',more_help:'Help — how to use Dorak',more_privacy:'Privacy',more_about2:'About Dorak',
+pg_help_h:'Help',pg_privacy_h:'Privacy',pg_about_h:'About Dorak',
 greet_m:'Good morning',greet_e:'Good evening',nav_book:'Plan',nav_mine:'My visits',nav_me:'Account',nav_more:'More',
 me_h:'My account',me_sub:'Your basic details, stored on this device only',me_info_h:'👤 Personal details',me_save:'Save details',me_saved:'✅ Details saved',me_stats_v:'visits',me_stats_up:'upcoming',me_stats_fav:'favorite banks',
 more_h:'More',more_sub:'App settings and backup',more_set_h:'⚙️ Settings',more_theme:'Dark mode',more_dark:'🌙 Dark',more_light:'☀️ Light',more_lang:'Language',more_about_h:'ℹ️ About Dorak',more_about_t:'Dorak is a personal bank-visit organizer. All your data stays on your device — no accounts, no servers.',
@@ -1228,6 +1279,36 @@ const renderTicket = () => {
   sb.append(wa,cal,map);if(window.addTicketImage)window.addTicketImage(bk,sb);
 };
 
+/* stage 3 — info pages + onboarding */
+const PAGES={
+help:{
+ h:()=>t('pg_help_h'),
+ b:()=>lang==='en'
+  ?`<ul><li><b>Plan a visit:</b> choose your bank, the service, the day and time, then your details. Review and save — the plan lives on your device.</li><li><b>Documents:</b> every service shows a checklist of what to bring. Tick items off as you pack them.</li><li><b>My visits:</b> upcoming and past plans, with options to share, add to calendar, reschedule or cancel.</li><li><b>Backup:</b> from More, download a backup file (or copy its text) and restore it anytime — useful when changing phones.</li><li><b>Install on iPhone:</b> open in Safari, tap Share, then "Add to Home Screen".</li></ul>`
+  :`<ul><li><b>خطط لزيارة:</b> اختار البنك، الخدمة، اليوم والميعاد، وبعدين بياناتك. راجع واحفظ — الخطة بتتحفظ على جهازك.</li><li><b>المستندات:</b> كل خدمة بتعرض تشيكليست بالمطلوب منك. علّم على كل حاجة جهزتها.</li><li><b>زياراتي:</b> مواعيدك القادمة والسابقة، مع مشاركة وإضافة للتقويم وإعادة جدولة وإلغاء.</li><li><b>النسخة الاحتياطية:</b> من «المزيد» نزّل نسخة (أو انسخ نصها) واسترجعها في أي وقت — مفيد لما تغيّر موبايلك.</li><li><b>التثبيت على الآيفون:</b> افتح الموقع في سفاري، اضغط مشاركة، وبعدين «Add to Home Screen».</li></ul>`},
+privacy:{
+ h:()=>t('pg_privacy_h'),
+ b:()=>lang==='en'
+  ?`<ul><li>Dorak stores everything — plans, name, phone, favorites, document checks — in your browser's local storage on this device only.</li><li>Nothing is sent to any server. There are no accounts, no analytics, no tracking.</li><li>Your data is never shared with any bank. Dorak does not book with the bank; it organizes your personal plan.</li><li>Backup files you export stay with you — keep them private, they contain your details.</li><li>Clearing the site's data from your browser settings erases everything permanently.</li></ul>`
+  :`<ul><li>دُرَك بيحفظ كل حاجة — الخطط، الاسم، الموبايل، المفضلة، علامات المستندات — في تخزين المتصفح على جهازك بس.</li><li>مفيش أي بيانات بتتبعت لأي سيرفر. مفيش حسابات، مفيش تحليلات، مفيش تتبع.</li><li>بياناتك مش بتتشارك مع أي بنك. دُرَك مش بيحجز لدى البنك؛ بيرتّب خطتك الشخصية بس.</li><li>ملفات النسخ الاحتياطي اللي بتنزّلها بتفضل معاك — خلّيها خاصة، فيها بياناتك.</li><li>مسح بيانات الموقع من إعدادات المتصفح بيمسح كل حاجة نهائيًا.</li></ul>`},
+about:{
+ h:()=>t('pg_about_h'),
+ b:()=>lang==='en'
+  ?`<p><b>Dorak</b> is a personal bank-visit organizer: it helps you plan the visit, remember your documents, and keep your appointments in one place.</p><p>It is not affiliated with any bank and does not make real bookings. Branch hours and availability are not known to the app — always confirm with your branch or its hotline.</p><p>Made with 💚 in Egypt.</p>`
+  :`<p><b>دُرَك</b> منظّم زيارات شخصي للبنوك: بيساعدك تخطط الزيارة، تفتكر مستنداتك، وتحتفظ بمواعيدك في مكان واحد.</p><p>مش تابع لأي بنك ومش بيعمل حجوزات حقيقية. مواعيد الفروع وتوفرها مش معروفة للتطبيق — اتأكد دايمًا من فرعك أو الخط الساخن.</p><p>اتعمل بـ 💚 في مصر.</p>`}
+};
+const openPage=k=>{
+  const m=eid('pg-modal'); if(!m||!PAGES[k])return;
+  eid('pg-title').textContent=PAGES[k].h();
+  eid('pg-body').innerHTML=PAGES[k].b();
+  m.hidden=false;
+};
+const maybeOnboard=()=>{
+  let seen=null; try{ seen=localStorage.getItem('dorak_seen_v1'); }catch(_){}
+  if(seen) return;
+  const ob=eid('onboard'); if(ob) ob.hidden=false;
+};
+
 /* stage 2 — hero, profile, more */
 const updateHero = () => {
   const g=eid('hero-greet'); if(!g)return;
@@ -1437,6 +1518,19 @@ window.addEventListener('DOMContentLoaded',()=>{
   });
   const md2=eid('more-dark'); if(md2) md2.addEventListener('click',()=>{ const cur=document.documentElement.getAttribute('data-theme'); applyTheme(cur==='dark'?'light':'dark'); updateMore(); });
   const ml2=eid('more-lang'); if(ml2) ml2.addEventListener('click',()=>{ eid('btn-lang')?.click(); updateMore(); });
+
+  // stage3: info pages + onboarding
+  $$('[data-page]').forEach(b=>b.addEventListener('click',()=>openPage(b.dataset.page)));
+  const pgc=eid('pg-close'); if(pgc) pgc.addEventListener('click',()=>{ eid('pg-modal').hidden=true; });
+  const pgm=eid('pg-modal'); if(pgm) pgm.addEventListener('click',ev=>{ if(ev.target===pgm) pgm.hidden=true; });
+  const obgo=eid('ob-go');
+  if(obgo) obgo.addEventListener('click',()=>{
+    const nv=(eid('ob-name').value||'').trim();
+    if(nv.length>=2){ S.name=nv; save(); updateHero(); }
+    try{ localStorage.setItem('dorak_seen_v1','1'); }catch(_){}
+    eid('onboard').hidden=true;
+  });
+  maybeOnboard();
 
   // search
   const qi=eid('q-input');
