@@ -300,6 +300,24 @@ textarea.inp{height:auto;min-height:76px;padding:10px 12px;resize:none;line-heig
 
 
 @media(max-width:480px){.boardwrap{position:relative;top:auto}.cta .btn{min-width:0;padding-inline:12px;font-size:15px}.pill{max-width:96px;text-align:center}}
+/* wave3: hero + bottom nav + profile */
+.hero{display:flex;align-items:center;gap:12px;padding:16px 2px 2px}
+.hero .ava{width:46px;height:46px;border-radius:14px;background:linear-gradient(135deg,var(--pri),var(--pri2));color:#fff;display:grid;place-items:center;font-size:20px;font-weight:800;flex:none;box-shadow:var(--shadow-lg)}
+.hero .hg{font-size:19px;font-weight:800}
+.hero .hd{font-size:13px;color:var(--muted);margin-top:2px}
+.bnav{position:fixed;inset-inline:0;bottom:0;z-index:45;background:var(--card);border-top:1px solid var(--line);box-shadow:0 -8px 24px rgba(16,24,40,.08);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2px;padding:6px 8px calc(6px + env(safe-area-inset-bottom))}
+.bnav .bn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;height:52px;border:0;border-radius:12px;background:transparent;color:var(--muted);font-size:11px;font-weight:700;position:relative;cursor:pointer;font-family:var(--ui)}
+.bnav .bn[aria-selected="true"]{background:var(--priSoft);color:var(--pri2)}
+.bnav .bn .badge{position:absolute;top:2px;inset-inline-end:calc(50% - 24px);min-width:16px;height:16px;border-radius:8px;background:var(--bad);color:#fff;font-size:10px;display:grid;place-items:center;padding:0 4px}
+.app{padding-bottom:220px}
+.cta{bottom:calc(64px + env(safe-area-inset-bottom))}
+.pstats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:14px}
+.pstat{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px 8px;text-align:center;box-shadow:var(--shadow)}
+.pstat .n{font-size:20px;font-weight:800;color:var(--pri2)}
+.pstat .l{font-size:11px;color:var(--muted);margin-top:2px}
+.prow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.prow:last-of-type{border-bottom:0}
+.prow .t{font-weight:700;font-size:14px}
 /* wave2 */
 .bk.row{min-height:58px}
 #ios-hint{position:fixed;bottom:92px;left:50%;transform:translateX(-50%);z-index:90;width:min(92vw,448px);background:var(--card);border:1px solid var(--line);border-radius:16px;padding:10px 12px;display:flex;gap:10px;align-items:center;box-shadow:var(--shadow-lg);font-size:13px;line-height:1.5}
@@ -336,18 +354,15 @@ textarea.inp{height:auto;min-height:76px;padding:10px 12px;resize:none;line-heig
 </div>
 </div>
 <!-- TABS -->
-<div class="tabs" role="tablist" style="margin-top:14px">
-<button aria-selected="true" class="tab" data-tab="book" role="tab">
-<svg fill="none" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="17"><rect height="18" rx="2" width="18" x="3" y="4"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg>
-      <span data-i18n="tab_book">خطط لزيارة</span>
-    </button>
-<button aria-selected="false" class="tab" data-tab="mine" role="tab">
-<svg fill="none" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="17"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-      <span data-i18n="tab_mine">زياراتي</span><span class="badge" hidden="" id="badge-mine"></span>
-</button>
-</div>
 <!-- ═══ TAB: BOOK ═══ -->
 <div data-tab="book">
+<div class="hero">
+<div class="ava" id="hero-ava">👤</div>
+<div style="min-width:0">
+<div class="hg" id="hero-greet">مساء الخير 👋</div>
+<div class="hd" id="hero-date"></div>
+</div>
+</div>
 <!-- STEP 0: اختار البنك -->
 <div data-step="0">
 <h2 class="h1" data-i18n="s0_h">اختار البنك</h2>
@@ -430,6 +445,29 @@ textarea.inp{height:auto;min-height:76px;padding:10px 12px;resize:none;line-heig
 <h2 class="h1" data-i18n="mine_h">زياراتي</h2>
 <p class="sub" data-i18n="mine_sub">كل مواعيدك في مكان واحد</p>
 <div id="mine-wrap"></div>
+</div>
+<!-- ═══ TAB: ME ═══ -->
+<div data-tab="me" hidden="">
+<h2 class="h1" data-i18n="me_h">حسابي</h2>
+<p class="sub" data-i18n="me_sub">بياناتك الأساسية — بتتحفظ على جهازك بس</p>
+<div class="card">
+<div class="grp" data-i18n="me_info_h">👤 البيانات الشخصية</div>
+<div class="field"><label for="me-name" data-i18n="f_name">الاسم الكامل</label><input autocomplete="name" class="inp" data-i18n-ph="f_name_ph" id="me-name" placeholder="محمد أحمد محمود…" type="text"/></div>
+<div class="field"><label for="me-phone" data-i18n="f_phone">رقم الموبايل</label><input autocomplete="tel" class="inp" id="me-phone" inputmode="numeric" placeholder="01xxxxxxxxx" type="tel"/></div>
+<div class="field"><label for="me-gov" data-i18n="f_gov">المحافظة</label><select class="inp" id="me-gov"></select></div>
+<button class="btn pri" data-i18n="me_save" id="me-save" style="width:100%;margin-top:10px" type="button">حفظ البيانات</button>
+</div>
+<div class="pstats" id="me-stats"></div>
+</div>
+<!-- ═══ TAB: MORE ═══ -->
+<div data-tab="more" hidden="">
+<h2 class="h1" data-i18n="more_h">المزيد</h2>
+<p class="sub" data-i18n="more_sub">إعدادات التطبيق والنسخ الاحتياطي</p>
+<div class="card">
+<div class="grp" data-i18n="more_set_h">⚙️ الإعدادات</div>
+<div class="prow"><span class="t" data-i18n="more_theme">الوضع الليلي</span><button class="btn sm ghost" id="more-dark" type="button">🌙 ليلي</button></div>
+<div class="prow"><span class="t" data-i18n="more_lang">اللغة</span><button class="btn sm ghost" id="more-lang" type="button">English</button></div>
+</div>
 <div class="card" style="margin-top:16px">
 <div class="grp" data-i18n="backup_h">💾 نسخة احتياطية</div>
 <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;padding:4px 0 2px">
@@ -439,8 +477,19 @@ textarea.inp{height:auto;min-height:76px;padding:10px 12px;resize:none;line-heig
 </div>
 <input accept="application/json,.json" hidden="" id="import-file" type="file"/>
 </div>
+<div class="card" style="margin-top:16px">
+<div class="grp" data-i18n="more_about_h">ℹ️ عن دُرَك</div>
+<p data-i18n="more_about_t" style="font-size:13px;color:var(--muted);line-height:1.7;margin:4px 0 2px">دُرَك منظّم زيارات شخصي للبنوك. بياناتك كلها على جهازك — مفيش حسابات ولا سيرفرات.</p>
+</div>
 </div>
 </div><!-- /app -->
+<!-- BOTTOM NAV -->
+<nav aria-label="التنقل" class="bnav" role="tablist">
+<button aria-selected="true" class="bn" data-tab="book" role="tab" type="button"><svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="20"><rect height="18" rx="2" width="18" x="3" y="4"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg><span data-i18n="nav_book">خطط</span></button>
+<button aria-selected="false" class="bn" data-tab="mine" role="tab" type="button"><svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="20"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"></path></svg><span data-i18n="nav_mine">زياراتي</span><span class="badge" hidden="" id="badge-mine"></span></button>
+<button aria-selected="false" class="bn" data-tab="me" role="tab" type="button"><svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="20"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><span data-i18n="nav_me">حسابي</span></button>
+<button aria-selected="false" class="bn" data-tab="more" role="tab" type="button"><svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="20"><rect height="7" rx="1.5" width="7" x="3" y="3"></rect><rect height="7" rx="1.5" width="7" x="14" y="3"></rect><rect height="7" rx="1.5" width="7" x="3" y="14"></rect><rect height="7" rx="1.5" width="7" x="14" y="14"></rect></svg><span data-i18n="nav_more">المزيد</span></button>
+</nav>
 <!-- BOTTOM CTA -->
 <div class="cta" id="cta-bar">
 <div class="in">
@@ -613,6 +662,9 @@ try{lang=localStorage.getItem('dorak_lang')||'ar';}catch(_){}
 if(lang!=='ar'&&lang!=='en')lang='ar';
 const I18N={
 ar:{
+greet_m:'صباح الخير',greet_e:'مساء الخير',nav_book:'خطط',nav_mine:'زياراتي',nav_me:'حسابي',nav_more:'المزيد',
+me_h:'حسابي',me_sub:'بياناتك الأساسية — بتتحفظ على جهازك بس',me_info_h:'👤 البيانات الشخصية',me_save:'حفظ البيانات',me_saved:'✅ اتحفظت بياناتك',me_stats_v:'زيارة',me_stats_up:'قادمة',me_stats_fav:'بنك مفضل',
+more_h:'المزيد',more_sub:'إعدادات التطبيق والنسخ الاحتياطي',more_set_h:'⚙️ الإعدادات',more_theme:'الوضع الليلي',more_dark:'🌙 ليلي',more_light:'☀️ فاتح',more_lang:'اللغة',more_about_h:'ℹ️ عن دُرَك',more_about_t:'دُرَك منظّم زيارات شخصي للبنوك. بياناتك كلها على جهازك — مفيش حسابات ولا سيرفرات.',
 app_title:'دُرَك – تنظيم زيارات البنوك',meta_desc:'منظّم زيارات شخصي للبنوك، لا ينفذ حجزًا لدى البنك.',
 pill:'نظّم زيارتك',tab_book:'خطط لزيارة',tab_mine:'زياراتي',
 s0_h:'اختار البنك',s0_sub:'من أي بنك عاوز تاخد الخدمة؟',
@@ -652,6 +704,9 @@ backup_h:'💾 نسخة احتياطية',export_btn:'⬇️ تنزيل نسخة
 ios_hint:'📲 ثبّت دُرَك على موبايلك: من زرار المشاركة في سفاري اختار «Add to Home Screen»',
 hours_note:'🕐 مواعيد عمل أغلب البنوك: الأحد للخميس من 8:30 صباحًا حتى 3 عصرًا (بعض الفروع حتى 5). الجمعة والسبت إجازة. المواعيد بتختلف من فرع لفرع — اتأكد من فرعك أو الخط الساخن.'},
 en:{
+greet_m:'Good morning',greet_e:'Good evening',nav_book:'Plan',nav_mine:'My visits',nav_me:'Account',nav_more:'More',
+me_h:'My account',me_sub:'Your basic details, stored on this device only',me_info_h:'👤 Personal details',me_save:'Save details',me_saved:'✅ Details saved',me_stats_v:'visits',me_stats_up:'upcoming',me_stats_fav:'favorite banks',
+more_h:'More',more_sub:'App settings and backup',more_set_h:'⚙️ Settings',more_theme:'Dark mode',more_dark:'🌙 Dark',more_light:'☀️ Light',more_lang:'Language',more_about_h:'ℹ️ About Dorak',more_about_t:'Dorak is a personal bank-visit organizer. All your data stays on your device — no accounts, no servers.',
 app_title:'Dorak – Bank Visit Organizer',meta_desc:'A personal bank-visit organizer. It does not book with the bank.',
 pill:'Plan your visit',tab_book:'Plan a visit',tab_mine:'My visits',
 s0_h:'Choose your bank',s0_sub:'Which bank do you need the service from?',
@@ -1173,6 +1228,29 @@ const renderTicket = () => {
   sb.append(wa,cal,map);if(window.addTicketImage)window.addTicketImage(bk,sb);
 };
 
+/* stage 2 — hero, profile, more */
+const updateHero = () => {
+  const g=eid('hero-greet'); if(!g)return;
+  const now=new Date(); const h=now.getHours();
+  const first=(S.name||'').trim().split(/\s+/)[0]||'';
+  g.textContent=`${t(h<12?'greet_m':'greet_e')}${first?'، '+first:''} 👋`;
+  const d=eid('hero-date'); if(d) d.textContent=`${dayName(now.getDay())} ${now.getDate()} ${monthName(now.getMonth())}`;
+  const av=eid('hero-ava'); if(av) av.textContent=first?first[0]:'👤';
+};
+const updateMore = () => {
+  const md=eid('more-dark'); if(md) md.textContent=document.documentElement.getAttribute('data-theme')==='dark'?t('more_light'):t('more_dark');
+  const ml=eid('more-lang'); if(ml) ml.textContent=lang==='ar'?'English':'عربي';
+};
+const renderMe = () => {
+  const ni=eid('me-name'),pi=eid('me-phone'),gi=eid('me-gov'); if(!ni)return;
+  ni.value=S.name||''; pi.value=S.phone||'';
+  gi.innerHTML=`<option value="">${t('f_gov_ph')}</option>`+GOVS.map(([a,e])=>`<option value="${esc(a)}"${S.gov===a?' selected':''}>${esc(lang==='en'?e:a)}</option>`).join('');
+  const st=eid('me-stats'); if(st){
+    const up=S.bookings.filter(b=>isFutureVisit(b.dateStr,b.slot)).length;
+    st.innerHTML=[[String(S.bookings.length),t('me_stats_v')],[String(up),t('me_stats_up')],[String(getFavs().size),t('me_stats_fav')]].map(([n,l])=>`<div class="pstat"><div class="n">${n}</div><div class="l">${l}</div></div>`).join('');
+  }
+};
+
 /* mine tab */
 const renderMine = () => {
   const wrap=eid('mine-wrap'); if(!wrap)return; wrap.innerHTML='';
@@ -1300,8 +1378,9 @@ const render = () => {
   $$('[data-step]').forEach(e=>e.hidden=parseInt(e.dataset.step)!==S.step);
   $$('[data-tab]:not([role=tab])').forEach(e=>e.hidden=e.dataset.tab!==S.tab);
   $$('[role="tab"]').forEach(t=>t.setAttribute('aria-selected',t.dataset.tab===S.tab?'true':'false'));
+  updateHero();
   const cta=eid('cta-bar'); if(cta) cta.hidden=S.step===5||S.tab!=='book';
-  const back=eid('btn-back'); if(back) back.hidden=S.step===0||S.tab==='mine';
+  const back=eid('btn-back'); if(back) back.hidden=S.step===0||S.tab!=='book';
   if(S.tab==='book'){
     if(S.step===0){ renderQuick(); renderBanks(); }
     if(S.step===1) renderServices();
@@ -1309,7 +1388,7 @@ const render = () => {
     if(S.step===3) renderInfo();
     if(S.step===4){ renderConfirm(); renderChecklist(); }
     if(S.step===5) renderTicket();
-  } else { renderMine(); }
+  } else if(S.tab==='mine'){ renderMine(); } else if(S.tab==='me'){ renderMe(); } else { updateMore(); }
   const nb=eid('btn-next'); if(nb){ nb.disabled=!canAdvance(); nb.textContent=nextLabel(); }
   updateBoard();
 };
@@ -1346,6 +1425,18 @@ window.addEventListener('DOMContentLoaded',()=>{
 
   // tabs
   $$('[role="tab"]').forEach(tab=>tab.addEventListener('click',()=>{ S.tab=tab.dataset.tab; render(); }));
+
+  // stage2: profile save + more-page controls
+  const msv=eid('me-save');
+  if(msv) msv.addEventListener('click',()=>{
+    const nv=eid('me-name').value.trim(), pv=normalizePhone(eid('me-phone').value), gv=eid('me-gov').value;
+    if(nv.length<2){ showToast(t('toast_details')); return; }
+    if(pv && !/^01[0125][0-9]{8}$/.test(pv)){ showToast(t('toast_details')); return; }
+    S.name=nv; S.phone=pv; S.gov=gv; save(); updateHero(); renderMe();
+    showToast(t('me_saved'));
+  });
+  const md2=eid('more-dark'); if(md2) md2.addEventListener('click',()=>{ const cur=document.documentElement.getAttribute('data-theme'); applyTheme(cur==='dark'?'light':'dark'); updateMore(); });
+  const ml2=eid('more-lang'); if(ml2) ml2.addEventListener('click',()=>{ eid('btn-lang')?.click(); updateMore(); });
 
   // search
   const qi=eid('q-input');
