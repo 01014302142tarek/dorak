@@ -5,7 +5,7 @@
    - cache-first only for static assets (logos/icons) with background refresh
    - notifies open pages (SW_UPDATED) so they reload onto the new version
 */
-const VERSION = 'v5.6-2026-11-24';
+const VERSION = 'v5.7-2026-11-24';
 const CACHE = 'dorak-' + VERSION;
 const CORE  = ['/', '/index.html', '/manifest.json', '/icon-192.png', '/icon-512.png', '/apple-touch-icon.png',
   '/logos/aaib.png','/logos/abc.png','/logos/abe.png','/logos/abk.png','/logos/adcb.png',
@@ -40,6 +40,23 @@ self.addEventListener('activate', e => {
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
   const url = new URL(e.request.url);
+  // Google Fonts: cache first so installed PWAs keep their typography offline
+  if (url.origin === 'https://fonts.googleapis.com' || url.origin === 'https://fonts.gstatic.com') {
+    e.respondWith(
+      caches.match(e.request).then(cached => {
+        const fresh = fetch(e.request).then(res => {
+          if (res.ok) {
+            const clone = res.clone();
+            caches.open(CACHE).then(c => c.put(e.request, clone));
+          }
+          return res;
+        }).catch(() => cached);
+        return cached || fresh;
+      })
+    );
+    return;
+  }
+
   if (url.origin !== self.location.origin) return;
 
   // App shell: network first, cache only as offline fallback
