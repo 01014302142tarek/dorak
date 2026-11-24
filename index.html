@@ -736,7 +736,7 @@ try{lang=localStorage.getItem('dorak_lang')||'ar';}catch(_){}
 if(lang!=='ar'&&lang!=='en')lang='ar';
 const I18N={
 ar:{
-auth_h:'سجّل دخولك لدُرَك',auth_sub:'زياراتك وخططك بتتزامن على كل أجهزتك',auth_google:'المتابعة بحساب Google',auth_or:'أو',auth_email:'البريد الإلكتروني',auth_pass:'كلمة السر (٦ حروف أو أكتر)',auth_login:'تسجيل الدخول',auth_signup:'إنشاء الحساب',auth_to_signup:'مستخدم جديد؟ سجّل حساب',auth_to_login:'عندك حساب؟ سجّل دخولك',auth_err:'حصل خطأ — جرّب تاني',auth_err_fields:'راجع الإيميل وكلمة السر',auth_err_login:'الإيميل أو كلمة السر غلط',logout:'تسجيل الخروج',
+auth_h:'سجّل دخولك لدُرَك',auth_sub:'زياراتك وخططك بتتزامن على كل أجهزتك',auth_google:'المتابعة بحساب Google',auth_or:'أو',auth_email:'البريد الإلكتروني',auth_pass:'كلمة السر (٦ حروف أو أكتر)',auth_login:'تسجيل الدخول',auth_signup:'إنشاء الحساب',auth_to_signup:'مستخدم جديد؟ سجّل حساب',auth_to_login:'عندك حساب؟ سجّل دخولك',auth_err:'حصل خطأ — جرّب تاني',auth_err_fields:'راجع الإيميل وكلمة السر',auth_err_login:'الإيميل أو كلمة السر غلط',auth_google_wait:'جارٍ فتح جوجل…',auth_google_blocked:'لو مفيش صفحة جوجل اتفتحت، حدّث الصفحة وجرّب تاني — أو افتح دُرَك من سفاري وسجّل من هناك',auth_load_err:'حصل خطأ في تحميل تسجيل الدخول — حدّث الصفحة',logout:'تسجيل الخروج',
 ob_h:'أهلًا بيك في دُرَك 👋',ob_sub:'منظّم زياراتك للبنك — خطط، افتكر، وروّح مطمّن',ob_p1:'خطط زيارتك خطوة بخطوة وشوفها على الشاشة الرئيسية',ob_p2:'تشيكليست المستندات المطلوبة لكل خدمة قبل ما تتحرك',ob_p3:'بياناتك بتتحفظ على جهازك وبتتزامن بحسابك على كل أجهزتك',ob_name:'اسمك الأول (اختياري)',ob_name_ph:'طارق…',ob_go:'يلا نبدأ 🚀',
 more_info_h:'📖 معلومات',more_help:'المساعدة — إزاي تستخدم دُرَك',more_privacy:'الخصوصية',more_about2:'عن دُرَك',
 pg_help_h:'المساعدة',pg_privacy_h:'الخصوصية',pg_about_h:'عن دُرَك',
@@ -782,7 +782,7 @@ backup_h:'💾 نسخة احتياطية',export_btn:'⬇️ تنزيل نسخة
 ios_hint:'📲 ثبّت دُرَك على موبايلك: من زرار المشاركة في سفاري اختار «Add to Home Screen»',
 hours_note:'🕐 مواعيد عمل أغلب البنوك: الأحد للخميس من 8:30 صباحًا حتى 3 عصرًا (بعض الفروع حتى 5). الجمعة والسبت إجازة. المواعيد بتختلف من فرع لفرع — اتأكد من فرعك أو الخط الساخن.'},
 en:{
-auth_h:'Sign in to Dorak',auth_sub:'Your visits and plans sync across your devices',auth_google:'Continue with Google',auth_or:'or',auth_email:'Email address',auth_pass:'Password (6+ characters)',auth_login:'Sign in',auth_signup:'Create account',auth_to_signup:'New here? Create an account',auth_to_login:'Have an account? Sign in',auth_err:'Something went wrong — try again',auth_err_fields:'Check the email and password',auth_err_login:'Wrong email or password',logout:'Sign out',
+auth_h:'Sign in to Dorak',auth_sub:'Your visits and plans sync across your devices',auth_google:'Continue with Google',auth_or:'or',auth_email:'Email address',auth_pass:'Password (6+ characters)',auth_login:'Sign in',auth_signup:'Create account',auth_to_signup:'New here? Create an account',auth_to_login:'Have an account? Sign in',auth_err:'Something went wrong — try again',auth_err_fields:'Check the email and password',auth_err_login:'Wrong email or password',auth_google_wait:'Opening Google…',auth_google_blocked:'If no Google page opened, refresh and try again — or open Dorak in Safari and sign in there',auth_load_err:'Sign-in failed to load — please refresh',logout:'Sign out',
 ob_h:'Welcome to Dorak 👋',ob_sub:'Your bank-visit organizer — plan, remember, go relaxed',ob_p1:'Plan your visit step by step and see it on the home screen',ob_p2:'A checklist of required documents for every service before you go',ob_p3:'Your data is stored on this device and synced to your account across devices',ob_name:'Your first name (optional)',ob_name_ph:'Tariq…',ob_go:"Let's start 🚀",
 more_info_h:'📖 Info',more_help:'Help — how to use Dorak',more_privacy:'Privacy',more_about2:'About Dorak',
 pg_help_h:'Help',pg_privacy_h:'Privacy',pg_about_h:'About Dorak',
@@ -1862,9 +1862,11 @@ document.addEventListener('DOMContentLoaded',()=>{
     }
   }catch(_){}
 });
-</script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+</script><script src="/supabase.min.js?v=1"></script>
 <script>
 /* stage 4 — auth gate + cloud sync */
+try{
+if(!window.supabase) throw new Error('sb-lib-missing');
 const SB_URL='https://aukbzuxffwwvfxdddbbp.supabase.co';
 const SB_KEY='sb_publishable_VIsenb6TdAtsT_0zFev78Q_qWk7GDir';
 const sb=window.supabase.createClient(SB_URL,SB_KEY);
@@ -1897,6 +1899,8 @@ const syncPull=async u=>{
     else syncPush();
   }catch(_){}
 };
+const aqp=new URLSearchParams(location.search);
+if(aqp.get('error')) setTimeout(()=>agErr(t('auth_err')),300);
 sb.auth.onAuthStateChange((ev,session)=>{
   currentUser=(session&&session.user)||null;
   if(currentUser){ setGate(false); syncPull(currentUser); }
@@ -1904,8 +1908,14 @@ sb.auth.onAuthStateChange((ev,session)=>{
 });
 agE('ag-google').addEventListener('click',async()=>{
   agErr(null);
-  const {error}=await sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.origin}});
-  if(error) agErr(t('auth_err'));
+  const btn=agE('ag-google'), sp=btn?btn.querySelector('span'):null;
+  const revive=()=>{ if(btn){btn.disabled=false;} if(sp){sp.textContent=t('auth_google');} };
+  if(btn) btn.disabled=true; if(sp) sp.textContent=t('auth_google_wait');
+  try{
+    const {error}=await sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.origin}});
+    if(error){ revive(); agErr(t('auth_err')); return; }
+    setTimeout(()=>{ if(!document.hidden){ revive(); agErr(t('auth_google_blocked')); } },9000);
+  }catch(_){ revive(); agErr(t('auth_err')); }
 });
 agE('ag-switch').addEventListener('click',()=>{
   agMode=agMode==='login'?'signup':'login';
@@ -1922,9 +1932,10 @@ agE('ag-go').addEventListener('click',async()=>{
     const fn=agMode==='login'?'signInWithPassword':'signUp';
     const {error}=await sb.auth[fn]({email,password:pass});
     if(error) agErr(/invalid/i.test(error.message||'')?t('auth_err_login'):t('auth_err'));
-  }finally{ agE('ag-go').disabled=false; }
+  }catch(_){ agErr(t('auth_err')); }finally{ agE('ag-go').disabled=false; }
 });
 const bl=agE('btn-logout'); if(bl) bl.addEventListener('click',()=>sb.auth.signOut());
 (async()=>{ try{ const {data:{session}}=await sb.auth.getSession(); if(!session) setGate(true); }catch(_){ setGate(true); } })();
+}catch(_){ const g=document.getElementById('auth-gate'); if(g) g.hidden=false; const er=document.getElementById('ag-err'); if(er){ try{er.textContent=t('auth_load_err');}catch(__){er.textContent='\u062d\u0635\u0644 \u062e\u0637\u0623 \u0641\u064a \u0627\u0644\u062a\u062d\u0645\u064a\u0644';} er.hidden=false; } }
 </script></body>
 </html>
