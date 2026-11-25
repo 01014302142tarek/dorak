@@ -1449,8 +1449,9 @@ const renderHome=()=>{
     return `<div class="pgx">${q.map(([a,b])=>`<details><summary>${a}</summary><p>${b}</p></details>`).join('')}</div>`;}};
   PAGES.nearest={h:()=>en()?'Nearest branch':'أقرب فرع',b:()=>{
     const banks=[...new Set([...(S.bookings||[]).map(b=>b.bank),...(typeof getRecent==='function'?getRecent():[])])].map(bankById).filter(Boolean).slice(0,5);
-    return `<div class="pgx"><p>${en()?'Opens Google Maps near your current location.':'بيفتح خرائط جوجل على موقعك الحالي.'}</p><button class="btn pri" type="button" data-near="${en()?'bank branch':'فرع بنك'}">${en()?'Any bank':'أي بنك'}</button>${banks.map(b=>`<button class="btn" type="button" data-near="${esc(bankName(b)+' '+(en()?'branch':'فرع'))}">${esc(bankName(b))}</button>`).join('')}</div>`;},
-    after:()=>document.querySelectorAll('#pg-body [data-near]').forEach(b=>b.addEventListener('click',()=>mapsNear(b.dataset.near)))};
+    const lk=q=>'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q);
+    const a=(q,l,c)=>`<a class="btn ${c}" href="${lk(q)}" target="_blank" rel="noopener" style="text-decoration:none">${l}</a>`;
+    return `<div class="pgx"><p>${en()?'Opens Google Maps and shows branches near you.':'بيفتح خرائط جوجل ويوريك الفروع القريبة منك.'}</p>${a(en()?'bank branch near me':'فرع بنك بالقرب مني',en()?'Any bank':'أي بنك','pri')}${banks.map(b=>a(bankName(b)+' '+(en()?'branch near me':'فرع بالقرب مني'),esc(bankName(b)),'')).join('')}</div>`;}};
   PAGES.reminders={h:()=>en()?'Reminders':'تذكيرات الزيارات',b:()=>{
     const up=S.bookings.filter(b=>isFutureVisit(b.dateStr,b.slot)).sort((a,b)=>(a.dateStr+a.slot).localeCompare(b.dateStr+b.slot));
     const rows=up.length?up.map(b=>{const bk=bankById(b.bank);return `<div class="vrow"><span>${esc(bk?bankName(bk):'')}<br><small style="color:var(--muted)">${esc(fmtDate(b.dateStr))} ${esc(b.slot)}</small></span><button class="btn sm" type="button" data-ics="${esc(b.id)}" style="flex:none;width:auto">${en()?'Calendar':'للتقويم'}</button></div>`}).join(''):`<p style="color:var(--muted)">${en()?'No upcoming visits.':'مفيش زيارات جاية.'}</p>`;
