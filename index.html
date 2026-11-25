@@ -356,6 +356,35 @@ textarea.inp{height:auto;min-height:76px;padding:10px 12px;resize:none;line-heig
 .bk.row{min-height:58px}
 #ios-hint{position:fixed;bottom:92px;left:50%;transform:translateX(-50%);z-index:90;width:min(92vw,448px);background:var(--card);border:1px solid var(--line);border-radius:16px;padding:10px 12px;display:flex;gap:10px;align-items:center;box-shadow:var(--shadow-lg);font-size:13px;line-height:1.5}
 #ios-hint button{flex:none;width:28px;height:28px;border-radius:8px;border:1.5px solid var(--line2);background:transparent;font-size:14px;display:grid;place-items:center}
+
+/* ═══ HOME (v6) ═══ */
+.bnav{grid-template-columns:repeat(5,minmax(0,1fr))!important}
+.hm-hero{display:flex;align-items:center;gap:12px;padding:16px 2px 6px}
+.hm-hero .ava{width:48px;height:48px;border-radius:16px;background:linear-gradient(135deg,var(--pri),var(--pri2));color:#fff;display:grid;place-items:center;font-size:21px;font-weight:800;flex:none;box-shadow:var(--shadow-lg)}
+.hm-hero .hg{font-size:20px;font-weight:900}.hm-hero .hd{font-size:13px;color:var(--muted);margin-top:2px}
+.hm-next{margin:12px 0 4px;border-radius:24px;padding:18px;color:#fff;background:linear-gradient(135deg,#0E9F6E,#0B6E4F 70%);box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
+.hm-next:after{content:"";position:absolute;inset-inline-end:-40px;top:-40px;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.10)}
+.hm-next .k{font-size:12px;font-weight:700;opacity:.85}.hm-next .b{font-size:21px;font-weight:900;margin-top:4px}
+.hm-next .s{font-size:14px;opacity:.92;margin-top:2px}.hm-next .w{display:flex;gap:8px;align-items:center;margin-top:12px;font-weight:800;font-size:15px;flex-wrap:wrap}
+.hm-next .w span{background:rgba(255,255,255,.18);border-radius:10px;padding:5px 10px}
+.hm-next .acts{display:flex;gap:8px;margin-top:14px;position:relative;z-index:1}
+.hm-next button{flex:1;height:42px;border-radius:12px;border:0;font-weight:800;font-size:14px;background:#fff;color:#0B6E4F;cursor:pointer}
+.hm-next button.g{background:rgba(255,255,255,.18);color:#fff}
+.hm-empty{background:var(--card);box-shadow:var(--shadow);border-radius:24px;padding:20px;text-align:center;margin:12px 0 4px}
+.hm-empty b{display:block;font-size:18px;font-weight:900}.hm-empty p{color:var(--muted);margin:6px 0 14px;font-size:14px}
+.hm-h{font-size:16px;font-weight:900;margin:20px 2px 10px}
+.hm-quick{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.hm-q{border:0;background:var(--card);box-shadow:var(--shadow);border-radius:18px;padding:12px 4px;display:flex;flex-direction:column;align-items:center;gap:6px;font-weight:800;font-size:12px;color:var(--ink);cursor:pointer;font-family:inherit}
+.hm-q i{font-style:normal;width:42px;height:42px;border-radius:14px;background:var(--priSoft);display:grid;place-items:center;font-size:20px}
+.hm-svc{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.hm-s{border:0;background:var(--card);box-shadow:var(--shadow);border-radius:18px;padding:14px;text-align:start;display:flex;gap:10px;align-items:center;font-family:inherit;color:var(--ink);cursor:pointer}
+.hm-s i{font-style:normal;font-size:22px}.hm-s b{font-size:13.5px;font-weight:800;line-height:1.3}
+.hm-tip{margin-top:18px;background:var(--priSoft);color:var(--pri2);border-radius:18px;padding:14px;font-size:13.5px;font-weight:700;line-height:1.6}
+.pgx details{background:var(--paper);border-radius:14px;padding:12px 14px;margin:8px 0}
+.pgx summary{font-weight:800;cursor:pointer}.pgx details p{margin:8px 0 0;color:var(--muted);line-height:1.7}
+.pgx .btn{width:100%;margin-top:10px}.pgx .vrow{display:flex;justify-content:space-between;gap:8px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.pgx .prof{text-align:center;padding:6px 0 10px}.pgx .prof .ava{width:72px;height:72px;border-radius:24px;margin:0 auto 8px;background:linear-gradient(135deg,var(--pri),var(--pri2));color:#fff;display:grid;place-items:center;font-size:30px;font-weight:900}
+.pgx .kv{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}.pgx .kv span:first-child{color:var(--muted)}
 </style>
 <style>.day .lvl,.tm .lvl{display:none}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important}}</style></head>
 <body>
@@ -365,7 +394,7 @@ textarea.inp{height:auto;min-height:76px;padding:10px 12px;resize:none;line-heig
 <div class="brand">
 <div class="logo"><img alt="Dorak" src="/icon-192.png" width="44" height="44"></div>
 <h1 class="brand-name">دُرَك</h1>
-<span id="app-version" style="font-size:10px;color:var(--muted);align-self:flex-end;padding-bottom:8px">v5</span>
+<span id="app-version" style="font-size:10px;color:var(--muted);align-self:flex-end;padding-bottom:8px">v6</span>
 </div>
 <div style="display:flex;gap:8px;align-items:center">
 <button aria-label="Language / اللغة" class="icon-btn lang-btn" id="btn-lang" title="English / العربية" type="button">EN</button>
@@ -388,6 +417,10 @@ textarea.inp{height:auto;min-height:76px;padding:10px 12px;resize:none;line-heig
 </div>
 </div>
 <!-- TABS -->
+<!-- ═══ TAB: HOME ═══ -->
+<div data-tab="home">
+<div id="home-wrap"></div>
+</div>
 <!-- ═══ TAB: BOOK ═══ -->
 <div data-tab="book">
 <div class="hero">
@@ -514,6 +547,9 @@ textarea.inp{height:auto;min-height:76px;padding:10px 12px;resize:none;line-heig
 </div>
 <div class="card" style="margin-top:16px">
 <div class="grp" data-i18n="more_info_h">📖 معلومات</div>
+<button class="prow linkrow" data-page="faq" type="button"><span class="t">أسئلة شائعة</span><span class="chev">‹</span></button>
+<button class="prow linkrow" data-page="reminders" type="button"><span class="t">تذكيرات الزيارات</span><span class="chev">‹</span></button>
+<button class="prow linkrow" data-page="nearest" type="button"><span class="t">أقرب فرع</span><span class="chev">‹</span></button>
 <button class="prow linkrow" data-page="help" type="button"><span class="t" data-i18n="more_help">المساعدة — إزاي تستخدم دُرَك</span><span class="chev">‹</span></button>
 <button class="prow linkrow" data-page="privacy" type="button"><span class="t" data-i18n="more_privacy">الخصوصية</span><span class="chev">‹</span></button>
 <button class="prow linkrow" data-page="about" type="button"><span class="t" data-i18n="more_about2">عن دُرَك</span><span class="chev">‹</span></button>
@@ -522,7 +558,8 @@ textarea.inp{height:auto;min-height:76px;padding:10px 12px;resize:none;line-heig
 </div><!-- /app -->
 <!-- BOTTOM NAV -->
 <nav aria-label="التنقل" class="bnav" role="tablist">
-<button aria-selected="true" class="bn" data-tab="book" role="tab" type="button"><svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="20"><rect height="18" rx="2" width="18" x="3" y="4"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg><span data-i18n="nav_book">خطط</span></button>
+<button aria-selected="false" class="bn" data-tab="home" role="tab" type="button"><svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="20"><path d="M3 11l9-8 9 8"></path><path d="M5 10v10h14V10"></path></svg><span data-i18n="nav_home">الرئيسية</span></button>
+<button aria-selected="false" class="bn" data-tab="book" role="tab" type="button"><svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="20"><rect height="18" rx="2" width="18" x="3" y="4"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg><span data-i18n="nav_book">خطط</span></button>
 <button aria-selected="false" class="bn" data-tab="mine" role="tab" type="button"><svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="20"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"></path></svg><span data-i18n="nav_mine">زياراتي</span><span class="badge" hidden="" id="badge-mine"></span></button>
 <button aria-selected="false" class="bn" data-tab="me" role="tab" type="button"><svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="20"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg><span data-i18n="nav_me">حسابي</span></button>
 <button aria-selected="false" class="bn" data-tab="more" role="tab" type="button"><svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="20"><rect height="7" rx="1.5" width="7" x="3" y="3"></rect><rect height="7" rx="1.5" width="7" x="14" y="3"></rect><rect height="7" rx="1.5" width="7" x="3" y="14"></rect><rect height="7" rx="1.5" width="7" x="14" y="14"></rect></svg><span data-i18n="nav_more">المزيد</span></button>
@@ -740,7 +777,7 @@ auth_h:'سجّل دخولك لدُرَك',auth_sub:'زياراتك وخططك ب
 ob_h:'أهلًا بيك في دُرَك 👋',ob_sub:'منظّم زياراتك للبنك — خطط، افتكر، وروّح مطمّن',ob_p1:'خطط زيارتك خطوة بخطوة وشوفها على الشاشة الرئيسية',ob_p2:'تشيكليست المستندات المطلوبة لكل خدمة قبل ما تتحرك',ob_p3:'بياناتك بتتحفظ على جهازك وبتتزامن بحسابك على كل أجهزتك',ob_name:'اسمك الأول (اختياري)',ob_name_ph:'طارق…',ob_go:'يلا نبدأ 🚀',
 more_info_h:'📖 معلومات',more_help:'المساعدة — إزاي تستخدم دُرَك',more_privacy:'الخصوصية',more_about2:'عن دُرَك',
 pg_help_h:'المساعدة',pg_privacy_h:'الخصوصية',pg_about_h:'عن دُرَك',
-greet_m:'صباح الخير',greet_e:'مساء الخير',nav_book:'خطط',nav_mine:'زياراتي',nav_me:'حسابي',nav_more:'المزيد',
+nav_home:'الرئيسية',greet_m:'صباح الخير',greet_e:'مساء الخير',nav_book:'خطط',nav_mine:'زياراتي',nav_me:'حسابي',nav_more:'المزيد',
 me_h:'حسابي',me_sub:'بياناتك الأساسية — على جهازك ومتزامنة مع حسابك',me_info_h:'👤 البيانات الشخصية',me_save:'حفظ البيانات',me_saved:'✅ اتحفظت بياناتك',me_stats_v:'زيارة',me_stats_up:'قادمة',me_stats_fav:'بنك مفضل',
 more_h:'المزيد',more_sub:'إعدادات التطبيق والنسخ الاحتياطي',more_set_h:'⚙️ الإعدادات',more_theme:'الوضع الليلي',more_dark:'🌙 ليلي',more_light:'☀️ فاتح',more_lang:'اللغة',more_about_h:'ℹ️ عن دُرَك',more_about_t:'دُرَك منظّم زيارات شخصي للبنوك. بياناتك على جهازك، وبتتزامن مع حسابك لو سجّلت دخولك.',
 app_title:'دُرَك – تنظيم زيارات البنوك',meta_desc:'منظّم زيارات شخصي للبنوك، لا ينفذ حجزًا لدى البنك.',
@@ -786,7 +823,7 @@ auth_h:'Sign in to Dorak',auth_sub:'Your visits and plans sync across your devic
 ob_h:'Welcome to Dorak 👋',ob_sub:'Your bank-visit organizer — plan, remember, go relaxed',ob_p1:'Plan your visit step by step and see it on the home screen',ob_p2:'A checklist of required documents for every service before you go',ob_p3:'Your data is stored on this device and synced to your account across devices',ob_name:'Your first name (optional)',ob_name_ph:'Tariq…',ob_go:"Let's start 🚀",
 more_info_h:'📖 Info',more_help:'Help — how to use Dorak',more_privacy:'Privacy',more_about2:'About Dorak',
 pg_help_h:'Help',pg_privacy_h:'Privacy',pg_about_h:'About Dorak',
-greet_m:'Good morning',greet_e:'Good evening',nav_book:'Plan',nav_mine:'My visits',nav_me:'Account',nav_more:'More',
+nav_home:'Home',greet_m:'Good morning',greet_e:'Good evening',nav_book:'Plan',nav_mine:'My visits',nav_me:'Account',nav_more:'More',
 me_h:'My account',me_sub:'Your basic details, kept on this device and synced to your account',me_info_h:'👤 Personal details',me_save:'Save details',me_saved:'✅ Details saved',me_stats_v:'visits',me_stats_up:'upcoming',me_stats_fav:'favorite banks',
 more_h:'More',more_sub:'App settings and backup',more_set_h:'⚙️ Settings',more_theme:'Dark mode',more_dark:'🌙 Dark',more_light:'☀️ Light',more_lang:'Language',more_about_h:'ℹ️ About Dorak',more_about_t:'Dorak is a personal bank-visit organizer. Your data stays on your device and syncs to your account when you sign in.',
 app_title:'Dorak – Bank Visit Organizer',meta_desc:'A personal bank-visit organizer. It does not book with the bank.',
@@ -888,7 +925,7 @@ const visitInstant=(date,slot)=>{
 };
 /* ── state ── */
 let S = {
-  tab:'book', step:0, q:'', cat:'all',
+  tab:'home', step:0, q:'', cat:'all',
   bank:null, service:null, dateStr:null, slot:null,
   gov:'', branch:'', name:'', phone:'', notes:'',
   bookings:[], toast:null, cancelTarget:null, docsOpen:null,
@@ -1333,7 +1370,7 @@ const openPage=k=>{
   const m=eid('pg-modal'); if(!m||!PAGES[k])return;
   eid('pg-title').textContent=PAGES[k].h();
   eid('pg-body').innerHTML=PAGES[k].b();
-  m.hidden=false;
+  m.hidden=false; if(PAGES[k].after)PAGES[k].after();
 };
 const maybeOnboard=()=>{
   let seen=null; try{ seen=localStorage.getItem('dorak_seen_v1'); }catch(_){}
@@ -1363,6 +1400,74 @@ const renderMe = () => {
     st.innerHTML=[[String(S.bookings.length),t('me_stats_v')],[String(up),t('me_stats_up')],[String(getFavs().size),t('me_stats_fav')]].map(([n,l])=>`<div class="pstat"><div class="n">${n}</div><div class="l">${l}</div></div>`).join('');
   }
 };
+
+
+/* ═══ v6: home dashboard + extra pages ═══ */
+const goTab=(tab,step)=>{ S.tab=tab; if(step!=null)S.step=step; render(); window.scrollTo(0,0); };
+const nextVisit=()=>S.bookings.filter(b=>isFutureVisit(b.dateStr,b.slot)).sort((a,b)=>(a.dateStr+a.slot).localeCompare(b.dateStr+b.slot))[0];
+const mapsNear=(q)=>{
+  const fb='https://www.google.com/maps/search/'+encodeURIComponent(q);
+  if(!navigator.geolocation){window.open(fb,'_blank');return;}
+  navigator.geolocation.getCurrentPosition(
+    pos=>window.open('https://www.google.com/maps/search/'+encodeURIComponent(q)+'/@'+pos.coords.latitude+','+pos.coords.longitude+',14z','_blank'),
+    ()=>window.open(fb,'_blank'),{timeout:8000,maximumAge:300000});
+};
+const renderHome=()=>{
+  const w=eid('home-wrap'); if(!w)return;
+  const en=lang==='en', now=new Date(), h=now.getHours();
+  const first=(S.name||'').trim().split(/\s+/)[0]||'';
+  const nv=nextVisit();
+  let nextHtml;
+  if(nv){
+    const bank=bankById(nv.bank),sv=serviceById(nv.service);
+    const days=Math.round((parseDate(nv.dateStr)-parseDate(todayDate()))/86400000);
+    const when=days<=0?(en?'Today':'النهاردة'):days===1?(en?'Tomorrow':'بكرة'):(en?`In ${days} days`:`بعد ${days} أيام`);
+    nextHtml=`<div class="hm-next"><div class="k">${en?'Your next visit':'زيارتك الجاية'}</div><div class="b">${esc(bank?bankName(bank):'—')}</div><div class="s">${esc(sv?(en?sv.name_en:sv.name):'')}</div><div class="w"><span>${when}</span><span>${esc(fmtDate(nv.dateStr))}</span><span>${esc(nv.slot)}</span></div><div class="acts"><button type="button" id="hm-ticket">${en?'View ticket':'عرض التذكرة'}</button><button type="button" class="g" id="hm-ics">${en?'Add to calendar':'أضف للتقويم'}</button></div></div>`;
+  } else {
+    nextHtml=`<div class="hm-empty"><b>${en?'No upcoming visits':'مفيش زيارات جاية'}</b><p>${en?'Plan your next bank visit in under a minute.':'خطط زيارتك للبنك في أقل من دقيقة.'}</p><button class="btn pri" id="hm-plan" type="button" style="width:100%">${en?'Plan a visit':'خطط زيارة'}</button></div>`;
+  }
+  const quick=[['📅',en?'Plan':'خطط','plan'],['🗂️',en?'My visits':'زياراتي','mine'],['📍',en?'Nearest':'أقرب فرع','page:nearest'],['🔔',en?'Reminders':'تذكيرات','page:reminders']];
+  const svc=SERVICES.slice(0,6);
+  w.innerHTML=`<div class="hm-hero"><div class="ava">${first?esc(first[0]):'👤'}</div><div style="min-width:0"><div class="hg">${t(h<12?'greet_m':'greet_e')}${first?'، '+esc(first):''} 👋</div><div class="hd">${dayName(now.getDay())} ${now.getDate()} ${monthName(now.getMonth())}</div></div></div>${nextHtml}
+<div class="hm-h">${en?'Quick actions':'اختصارات سريعة'}</div><div class="hm-quick">${quick.map(q=>`<button class="hm-q" type="button" data-q="${q[2]}"><i>${q[0]}</i>${q[1]}</button>`).join('')}</div>
+<div class="hm-h">${en?'Services':'الخدمات'}</div><div class="hm-svc">${svc.map(s=>`<button class="hm-s" type="button" data-svc="${s.id}"><i>${s.emoji}</i><b>${esc(en?s.name_en:s.name)}</b></button>`).join('')}</div>
+<div class="hm-tip">💡 ${en?'Not sure what to bring? Pick a service and Dorak shows the documents checklist.':'مش عارف تجيب إيه؟ اختار الخدمة ودُرَك يوريك قايمة المستندات المطلوبة.'}</div>
+<div class="hm-h">${en?'More':'المزيد'}</div><div class="card"><button class="prow linkrow" data-pp="profile" type="button"><span class="t">${en?'My profile':'حسابي وبياناتي'}</span><span class="chev">‹</span></button><button class="prow linkrow" data-pp="faq" type="button"><span class="t">${en?'FAQ':'أسئلة شائعة'}</span><span class="chev">‹</span></button></div>`;
+  const on=(sel,fn)=>w.querySelectorAll(sel).forEach(b=>b.addEventListener('click',()=>fn(b)));
+  on('#hm-plan',()=>goTab('book',0));
+  on('#hm-ticket',()=>goTab('mine'));
+  on('#hm-ics',()=>{ try{downloadICS(nv);}catch(_){} });
+  on('[data-q]',b=>{const q=b.dataset.q; if(q==='plan')goTab('book',0); else if(q==='mine')goTab('mine'); else openPage(q.slice(5));});
+  on('[data-svc]',b=>{ S.service=b.dataset.svc; goTab('book',0); });
+  on('[data-pp]',b=>openPage(b.dataset.pp));
+};
+(()=>{
+  const en=()=>lang==='en';
+  PAGES.faq={h:()=>en()?'FAQ':'أسئلة شائعة',b:()=>{
+    const q=en()?[['Does Dorak book with the bank?','No. Dorak is a personal organizer: it saves your plan, documents list and reminders. It does not contact any bank.'],['Where is my data stored?','On your device, and synced to your account when you are signed in.'],['How do I get reminders?','Open Reminders and allow notifications, or add the visit to your phone calendar.'],['How do I change or cancel a visit?','Go to My visits, open the visit and edit or delete it.'],['Which documents do I bring?','Pick a service and Dorak shows its checklist.']]
+      :[['هل دُرَك بيحجز فعلا مع البنك؟','لا. دُرَك منظّم شخصي: بيحفظ خطتك وقايمة المستندات والتذكيرات. مش بيتواصل مع أي بنك.'],['بياناتي متخزنة فين؟','على جهازك، وبتتزامن مع حسابك لما تكون مسجّل دخول.'],['إزاي أفعّل التذكيرات؟','افتح صفحة التذكيرات واسمح بالإشعارات، أو ضيف الزيارة لتقويم الموبايل.'],['إزاي أعدّل أو ألغي زيارة؟','روح زياراتي، افتح الزيارة وعدّل أو احذف.'],['أجيب معايا مستندات إيه؟','اختار الخدمة ودُرَك يعرض لك القايمة.']];
+    return `<div class="pgx">${q.map(([a,b])=>`<details><summary>${a}</summary><p>${b}</p></details>`).join('')}</div>`;}};
+  PAGES.nearest={h:()=>en()?'Nearest branch':'أقرب فرع',b:()=>{
+    const banks=[...new Set([...(S.bookings||[]).map(b=>b.bank),...(typeof getRecent==='function'?getRecent():[])])].map(bankById).filter(Boolean).slice(0,5);
+    return `<div class="pgx"><p>${en()?'Opens Google Maps near your current location.':'بيفتح خرائط جوجل على موقعك الحالي.'}</p><button class="btn pri" type="button" data-near="${en()?'bank branch':'فرع بنك'}">${en()?'Any bank':'أي بنك'}</button>${banks.map(b=>`<button class="btn" type="button" data-near="${esc(bankName(b)+' '+(en()?'branch':'فرع'))}">${esc(bankName(b))}</button>`).join('')}</div>`;},
+    after:()=>document.querySelectorAll('#pg-body [data-near]').forEach(b=>b.addEventListener('click',()=>mapsNear(b.dataset.near)))};
+  PAGES.reminders={h:()=>en()?'Reminders':'تذكيرات الزيارات',b:()=>{
+    const up=S.bookings.filter(b=>isFutureVisit(b.dateStr,b.slot)).sort((a,b)=>(a.dateStr+a.slot).localeCompare(b.dateStr+b.slot));
+    const rows=up.length?up.map(b=>{const bk=bankById(b.bank);return `<div class="vrow"><span>${esc(bk?bankName(bk):'')}<br><small style="color:var(--muted)">${esc(fmtDate(b.dateStr))} ${esc(b.slot)}</small></span><button class="btn sm" type="button" data-ics="${esc(b.id)}" style="flex:none;width:auto">${en()?'Calendar':'للتقويم'}</button></div>`}).join(''):`<p style="color:var(--muted)">${en()?'No upcoming visits.':'مفيش زيارات جاية.'}</p>`;
+    return `<div class="pgx"><p>${en()?'Get a notification about 24 hours before each visit (while the app is open or installed), and add visits to your calendar.':'هتوصلك إشعار قبل الزيارة بحوالي 24 ساعة، وتقدر تضيف الزيارات لتقويم الموبايل.'}</p><button class="btn pri" type="button" id="rm-on">🔔 ${en()?'Enable notifications':'فعّل الإشعارات'}</button>${rows}</div>`;},
+    after:()=>{
+      const on=document.getElementById('rm-on'); if(on)on.addEventListener('click',async()=>{try{const p=await Notification.requestPermission();showToast(p==='granted'?(en()?'Notifications on':'الإشعارات اتفعلت'):(en()?'Notifications blocked':'الإشعارات مقفولة'));}catch(_){showToast(en()?'Not supported here':'مش مدعومة هنا');}});
+      document.querySelectorAll('#pg-body [data-ics]').forEach(b=>b.addEventListener('click',()=>{const bk=S.bookings.find(x=>x.id===b.dataset.ics); if(bk)downloadICS(bk);}));}};
+  PAGES.profile={h:()=>en()?'My profile':'حسابي',b:()=>{
+    const u=window.__dkUser,n=(S.name||'').trim(),up=S.bookings.filter(b=>isFutureVisit(b.dateStr,b.slot)).length;
+    const gv=(typeof govLabel==='function'&&S.gov)?govLabel(S.gov):'';
+    const kv=(a,b)=>`<div class="kv"><span>${a}</span><span>${esc(b||'—')}</span></div>`;
+    return `<div class="pgx"><div class="prof"><div class="ava">${n?esc(n[0]):'👤'}</div><b>${esc(n||(en()?'No name yet':'من غير اسم'))}</b></div>${kv(en()?'Email':'الإيميل',u&&u.email)}${kv(en()?'Phone':'الموبايل',S.phone)}${kv(en()?'Governorate':'المحافظة',gv)}${kv(en()?'Total visits':'كل الزيارات',String(S.bookings.length))}${kv(en()?'Upcoming':'القادمة',String(up))}<button class="btn pri" type="button" id="pf-edit">${en()?'Edit my details':'تعديل بياناتي'}</button><button class="btn" type="button" id="pf-set">${en()?'Settings & backup':'الإعدادات والنسخ الاحتياطي'}</button><button class="btn danger" type="button" id="pf-out">${en()?'Sign out':'تسجيل الخروج'}</button></div>`;},
+    after:()=>{const c=()=>{document.getElementById('pg-modal').hidden=true;};
+      document.getElementById('pf-edit')?.addEventListener('click',()=>{c();goTab('me');});
+      document.getElementById('pf-set')?.addEventListener('click',()=>{c();goTab('more');});
+      document.getElementById('pf-out')?.addEventListener('click',()=>{c();document.getElementById('btn-logout')?.click();});}};
+})();
 
 /* mine tab */
 const renderMine = () => {
@@ -1492,6 +1597,7 @@ const render = () => {
   $$('[data-tab]:not([role=tab])').forEach(e=>e.hidden=e.dataset.tab!==S.tab);
   $$('[role="tab"]').forEach(t=>t.setAttribute('aria-selected',t.dataset.tab===S.tab?'true':'false'));
   updateHero();
+  const bw=document.querySelector('.boardwrap'); if(bw) bw.hidden=S.tab==='home';
   const cta=eid('cta-bar'); if(cta) cta.hidden=S.step===5||S.tab!=='book';
   const back=eid('btn-back'); if(back) back.hidden=S.step===0||S.tab!=='book';
   if(S.tab==='book'){
@@ -1501,7 +1607,7 @@ const render = () => {
     if(S.step===3) renderInfo();
     if(S.step===4){ renderConfirm(); renderChecklist(); }
     if(S.step===5) renderTicket();
-  } else if(S.tab==='mine'){ renderMine(); } else if(S.tab==='me'){ renderMe(); } else { updateMore(); }
+  } else if(S.tab==='home'){ renderHome(); } else if(S.tab==='mine'){ renderMine(); } else if(S.tab==='me'){ renderMe(); } else { updateMore(); }
   const nb=eid('btn-next'); if(nb){ nb.disabled=!canAdvance(); nb.textContent=nextLabel(); }
   updateBoard();
 };
@@ -1902,7 +2008,7 @@ const syncPull=async u=>{
 const aqp=new URLSearchParams(location.search);
 if(aqp.get('error')) setTimeout(()=>agErr(t('auth_err')),300);
 sb.auth.onAuthStateChange((ev,session)=>{
-  currentUser=(session&&session.user)||null;
+  currentUser=(session&&session.user)||null; window.__dkUser=currentUser;
   if(currentUser){ setGate(false); syncPull(currentUser); }
   else setGate(true);
 });
