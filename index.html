@@ -17,7 +17,7 @@
 <title>دُرَك – تنظيم زيارات البنوك</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'"><noscript><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet"></noscript>
 <style>
 /* ═══ CSS VARIABLES — Direction B: modern fintech (emerald) ═══ */
 :root{
@@ -314,7 +314,7 @@ textarea.inp{height:auto;min-height:76px;padding:10px 12px;resize:none;line-heig
 .ag-switch{background:none;border:0;color:var(--pri);font-weight:700;margin-top:12px;cursor:pointer;font-size:14px;font-family:var(--ui)}
 #ag-go{width:100%}
 /* wave4: info pages + onboarding */
-.pg{position:fixed;inset:0;z-index:60;background:rgba(14,42,51,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);overflow-y:auto;padding:24px 16px 80px}
+.pg{position:fixed;inset:0;z-index:60;background:rgba(14,42,51,.55);overflow-y:auto;padding:24px 16px 80px}
 .pg .sheet{max-width:480px;margin:0 auto;background:var(--card);border-radius:20px;padding:20px 16px 24px;box-shadow:var(--shadow-lg)}
 .pg .ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .pg .pt{font-weight:800;font-size:17px}
@@ -325,7 +325,7 @@ textarea.inp{height:auto;min-height:76px;padding:10px 12px;resize:none;line-heig
 .pg .pb li{margin:4px 0}
 .prow.linkrow{cursor:pointer;border-bottom:1px solid var(--line);width:100%;background:transparent;border-top:0;border-inline:0;font-family:var(--ui);text-align:start}
 .prow.linkrow .chev{color:var(--muted);font-size:18px}
-#onboard{position:fixed;inset:0;z-index:70;background:rgba(10,20,17,.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:flex;align-items:flex-end;justify-content:center;padding:0}
+#onboard{position:fixed;inset:0;z-index:70;background:rgba(10,20,17,.6);display:flex;align-items:flex-end;justify-content:center;padding:0}
 #onboard .sheet{background:var(--card);border-radius:24px 24px 0 0;max-width:480px;width:100%;padding:26px 20px calc(24px + env(safe-area-inset-bottom));box-shadow:var(--shadow-lg)}
 #onboard .logo-big{width:64px;height:64px;border-radius:18px;background:linear-gradient(135deg,var(--pri),var(--pri2));display:grid;place-items:center;margin:0 auto 12px;box-shadow:var(--shadow-lg)}
 #onboard .logo-big img{width:44px;height:44px;border-radius:10px}
@@ -394,7 +394,6 @@ textarea.inp{height:auto;min-height:76px;padding:10px 12px;resize:none;line-heig
 <div class="brand">
 <div class="logo"><img alt="Dorak" src="/icon-192.png" width="44" height="44"></div>
 <h1 class="brand-name">دُرَك</h1>
-<span id="app-version" style="font-size:10px;color:var(--muted);align-self:flex-end;padding-bottom:8px">v6</span>
 </div>
 <div style="display:flex;gap:8px;align-items:center">
 <button aria-label="Language / اللغة" class="icon-btn lang-btn" id="btn-lang" title="English / العربية" type="button">EN</button>
@@ -402,7 +401,6 @@ textarea.inp{height:auto;min-height:76px;padding:10px 12px;resize:none;line-heig
 <svg fill="none" height="18" id="ico-moon" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"></path></svg>
 <svg fill="none" height="18" hidden="" id="ico-sun" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="18"><circle cx="12" cy="12" r="5"></circle><line x1="12" x2="12" y1="1" y2="3"></line><line x1="12" x2="12" y1="21" y2="23"></line><line x1="4.22" x2="5.64" y1="4.22" y2="5.64"></line><line x1="18.36" x2="19.78" y1="18.36" y2="19.78"></line><line x1="1" x2="3" y1="12" y2="12"></line><line x1="21" x2="23" y1="12" y2="12"></line><line x1="4.22" x2="5.64" y1="19.78" y2="18.36"></line><line x1="18.36" x2="19.78" y1="5.64" y2="4.22"></line></svg>
 </button>
-<span class="pill" data-i18n="pill">نظّم زيارتك</span>
 </div>
 </div>
 <!-- LED BOARD -->
@@ -532,8 +530,6 @@ textarea.inp{height:auto;min-height:76px;padding:10px 12px;resize:none;line-heig
 <p class="sub" data-i18n="more_sub">إعدادات التطبيق والنسخ الاحتياطي</p>
 <div class="card">
 <div class="grp" data-i18n="more_set_h">⚙️ الإعدادات</div>
-<div class="prow"><span class="t" data-i18n="more_theme">الوضع الليلي</span><button class="btn sm ghost" id="more-dark" type="button">🌙 ليلي</button></div>
-<div class="prow"><span class="t" data-i18n="more_lang">اللغة</span><button class="btn sm ghost" id="more-lang" type="button">English</button></div>
 <div class="prow"><span class="t" data-i18n="logout">تسجيل الخروج</span><button class="btn sm ghost" id="btn-logout" type="button">⎋ خروج</button></div>
 </div>
 <div class="card" style="margin-top:16px">
@@ -611,7 +607,7 @@ textarea.inp{height:auto;min-height:76px;padding:10px 12px;resize:none;line-heig
 <!-- TOAST -->
 <div aria-live="polite" class="toast" id="toast" role="status"></div>
 <!-- BOOKING DETAIL MODAL -->
-<div hidden="" id="bk-modal" style="position:fixed;inset:0;z-index:50;background:rgba(14,42,51,.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);overflow-y:auto;padding:20px 16px 60px">
+<div hidden="" id="bk-modal" style="position:fixed;inset:0;z-index:50;background:rgba(14,42,51,.6);overflow-y:auto;padding:20px 16px 60px">
 <div style="max-width:480px;margin:0 auto">
 <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
 <span data-i18n="modal_h" style="font-weight:700;font-size:17px;color:#fff">تفاصيل الزيارة</span>
@@ -625,7 +621,7 @@ textarea.inp{height:auto;min-height:76px;padding:10px 12px;resize:none;line-heig
 </div>
 </div>
 <!-- LOAN CALC MODAL -->
-<div hidden="" id="loan-modal" style="position:fixed;inset:0;z-index:55;background:rgba(14,42,51,.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:flex-end;padding:0">
+<div hidden="" id="loan-modal" style="position:fixed;inset:0;z-index:55;background:rgba(14,42,51,.6);display:flex;align-items:flex-end;padding:0">
 <div style="max-width:480px;margin:0 auto;width:100%;background:var(--card);border-radius:22px 22px 0 0;padding:20px 16px 40px;border-top:2px solid var(--ink)">
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
 <b data-i18n="calc_h" style="font-size:18px">🧾 تقدير أقساط قرض بفائدة متناقصة</b>
@@ -1426,10 +1422,12 @@ const renderHome=()=>{
   } else {
     nextHtml=`<div class="hm-empty"><b>${en?'No upcoming visits':'مفيش زيارات جاية'}</b><p>${en?'Plan your next bank visit in under a minute.':'خطط زيارتك للبنك في أقل من دقيقة.'}</p><button class="btn pri" id="hm-plan" type="button" style="width:100%">${en?'Plan a visit':'خطط زيارة'}</button></div>`;
   }
-  const quick=[['📅',en?'Plan':'خطط','plan'],['🗂️',en?'My visits':'زياراتي','mine'],['📍',en?'Nearest':'أقرب فرع','page:nearest'],['🔔',en?'Reminders':'تذكيرات','page:reminders']];
+  const ups=S.bookings.filter(b=>isFutureVisit(b.dateStr,b.slot)).sort((a,b)=>(a.dateStr+a.slot).localeCompare(b.dateStr+b.slot)).slice(1,4);
+  const moreHtml=ups.length?`<div class="hm-h">${en?'Also coming up':'زيارات تانية جاية'}</div><div class="card">${ups.map(b=>{const bk=bankById(b.bank);return `<button class="prow linkrow" data-pp-mine="1" type="button"><span class="t">${esc(bk?bankName(bk):'—')} · ${esc(fmtDate(b.dateStr))} ${esc(b.slot)}</span><span class="chev">‹</span></button>`}).join('')}</div>`:'';
+  const quick=[['📅',en?'Plan':'خطط','plan'],['🗂️',en?'My visits':'زياراتي','mine'],['📍',en?'Nearest':'أقرب فرع','page:nearest'],['🧮',en?'Loan calc':'حاسبة قرض','calc']];
   const svc=SERVICES.slice(0,6);
   w.innerHTML=`<div class="hm-hero"><div class="ava">${first?esc(first[0]):'👤'}</div><div style="min-width:0"><div class="hg">${t(h<12?'greet_m':'greet_e')}${first?'، '+esc(first):''} 👋</div><div class="hd">${dayName(now.getDay())} ${now.getDate()} ${monthName(now.getMonth())}</div></div></div>${nextHtml}
-<div class="hm-h">${en?'Quick actions':'اختصارات سريعة'}</div><div class="hm-quick">${quick.map(q=>`<button class="hm-q" type="button" data-q="${q[2]}"><i>${q[0]}</i>${q[1]}</button>`).join('')}</div>
+${moreHtml}<div class="hm-h">${en?'Quick actions':'اختصارات سريعة'}</div><div class="hm-quick">${quick.map(q=>`<button class="hm-q" type="button" data-q="${q[2]}"><i>${q[0]}</i>${q[1]}</button>`).join('')}</div>
 <div class="hm-h">${en?'Services':'الخدمات'}</div><div class="hm-svc">${svc.map(s=>`<button class="hm-s" type="button" data-svc="${s.id}"><i>${s.emoji}</i><b>${esc(en?s.name_en:s.name)}</b></button>`).join('')}</div>
 <div class="hm-tip">💡 ${en?'Not sure what to bring? Pick a service and Dorak shows the documents checklist.':'مش عارف تجيب إيه؟ اختار الخدمة ودُرَك يوريك قايمة المستندات المطلوبة.'}</div>
 <div class="hm-h">${en?'More':'المزيد'}</div><div class="card"><button class="prow linkrow" data-pp="profile" type="button"><span class="t">${en?'My profile':'حسابي وبياناتي'}</span><span class="chev">‹</span></button><button class="prow linkrow" data-pp="faq" type="button"><span class="t">${en?'FAQ':'أسئلة شائعة'}</span><span class="chev">‹</span></button></div>`;
@@ -1437,9 +1435,10 @@ const renderHome=()=>{
   on('#hm-plan',()=>goTab('book',0));
   on('#hm-ticket',()=>goTab('mine'));
   on('#hm-ics',()=>{ try{downloadICS(nv);}catch(_){} });
-  on('[data-q]',b=>{const q=b.dataset.q; if(q==='plan')goTab('book',0); else if(q==='mine')goTab('mine'); else openPage(q.slice(5));});
+  on('[data-q]',b=>{const q=b.dataset.q; if(q==='plan')goTab('book',0); else if(q==='mine')goTab('mine'); else if(q==='calc')openLoanCalc(); else openPage(q.slice(5));});
   on('[data-svc]',b=>{ S.service=b.dataset.svc; goTab('book',0); });
   on('[data-pp]',b=>openPage(b.dataset.pp));
+  on('[data-pp-mine]',()=>goTab('mine'));
 };
 (()=>{
   const en=()=>lang==='en';
